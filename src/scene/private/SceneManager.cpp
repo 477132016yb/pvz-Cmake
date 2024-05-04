@@ -3,7 +3,7 @@
 //
 
 #include "../public/SceneManager.h"
-
+std::vector<int> g_selectNum=std::vector<int>(8,-1);
 void SceneManager::setCurrentState(Scene *scene) {
     m_scene=scene;
     m_scene->on_enter();
