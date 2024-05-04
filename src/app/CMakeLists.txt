@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.27)
+project(app)
+include_directories(${HEAD_PATH} ${HEAD_PLANT_PATH} ${HEAD_SCENE_PATH})
+aux_source_directory(./ SRC)
+link_directories(${LIBPATH})
+link_libraries(scene)
+add_executable(app ${SRC})
+#target_link_libraries(app winmm)

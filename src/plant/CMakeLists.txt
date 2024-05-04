@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.27)
+project(plant)
+include_directories(${HEAD_PATH})
+include_directories(${HEAD_PLANT_PATH})
+aux_source_directory(./private SRC)
+link_directories(${LIBPATH})
+link_libraries(common)
+add_library(plant STATIC ${SRC})

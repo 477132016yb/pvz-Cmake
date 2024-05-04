@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.27)
+project(common)
+include_directories(${HEAD_PATH})
+aux_source_directory(./private SRC)
+link_directories(${LIBPATH})
+link_libraries(easyx)
+add_library(common STATIC ${SRC})
