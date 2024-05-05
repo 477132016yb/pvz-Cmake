@@ -30,7 +30,6 @@ public:
     static int m_cost;
 protected:
     static int m_dy;
-    static Atlas::SP m_atls;
 };
 
 #endif //PVZ_PLANT_H

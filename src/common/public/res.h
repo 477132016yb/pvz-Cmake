@@ -20,12 +20,13 @@ public:
     IMAGE img_bg;
     IMAGE img_menu;
     IMAGE img_PanelBackGround;
-    IMAGE img_ChooserBackground;
-    IMAGE img_cardMask;
+    IMAGE img_selectBar,img_gameBar;
+    IMAGE img_selectCardMask,img_gameCardMask;
     std::vector<IMAGE>imgs_startButton;
     std::vector<IMAGE>imgs_fightButton;
-    std::vector<IMAGE>imgs_card;
-    std::vector<Atlas>atl_plants;
+    std::vector<IMAGE>imgs_selectCard,imgs_gameCard;
+    std::vector<Atlas>atls_plants;
+    Atlas atl_sunShine;
 };
 
 

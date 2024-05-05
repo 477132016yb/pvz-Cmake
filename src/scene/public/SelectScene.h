@@ -28,7 +28,7 @@ private:
     std::vector<IMAGE*>m_cardVault;
     IMAGE *m_bg;
     IMAGE *m_PanelBackGround;
-    IMAGE *m_ChooserBackground;
+    IMAGE *m_cardBar;
     IMAGE *m_cardMask;
 };
 

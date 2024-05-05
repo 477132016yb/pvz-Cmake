@@ -10,15 +10,15 @@ SelectScene::SelectScene() {
     m_fightButton=std::make_shared<Button>();
     m_bg=&r->img_bg;
     m_PanelBackGround=&r->img_PanelBackGround;
-    m_ChooserBackground=&r->img_ChooserBackground;
-    m_cardVault.resize(r->imgs_card.size());
+    m_cardBar=&r->img_selectBar;
+    m_cardVault.resize(r->imgs_selectCard.size());
     for(int i=0;i<m_cardVault.size();i++){
-        m_cardVault[i]=&r->imgs_card[i];
+        m_cardVault[i]=&r->imgs_selectCard[i];
     }
     m_cardWidth=50;
     m_cardHeight=72;
     m_isCardSelect.resize(m_cardVault.size());
-    m_cardMask=&r->img_cardMask;
+    m_cardMask=&r->img_selectCardMask;
 
     m_fightButton->setRect({155,545,150+150,550+40});
     m_fightButton->setImage(r->imgs_fightButton);
@@ -41,8 +41,8 @@ void SelectScene::on_update(int delta) {
 void SelectScene::on_draw() {
     putimage(0-m_camera->getPosition().x,0-m_camera->getPosition().y,m_bg);
     if(m_camera->isTrigger()){
-        int objY=m_ChooserBackground->getheight();
-        putimage(0,0,m_ChooserBackground);
+        int objY=m_cardBar->getheight();
+        putimage(0,0,m_cardBar);
         putimage(0,objY,m_PanelBackGround);
         m_fightButton->draw();
 

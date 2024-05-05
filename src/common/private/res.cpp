@@ -14,7 +14,8 @@ void res::init() {
     loadimage(&img_bg,"res/map/bg.jpg");
     loadimage(&img_menu,"res/map/menu.png");
     loadimage(&img_PanelBackGround,"res/map/PanelBackGround.png");
-    loadimage(&img_ChooserBackground,"res/map/ChooserBackground.png");
+    loadimage(&img_gameBar,"res/imgs/gameBar.png");
+    loadimage(&img_selectBar,"res/imgs/selectBar.png");
 
     for(int i=0;i<imgs_startButton.size();i++){
         TCHAR path[64];
@@ -27,19 +28,22 @@ void res::init() {
         loadimage(&imgs_fightButton[i],path);
     }
 
-    for(int i=0;i<imgs_card.size();i++){
+    for(int i=0;i<imgs_selectCard.size();i++){
         TCHAR path[64];
         sprintf_s(path,"res/Cards/%d.png",i+1);
-        loadimage(&imgs_card[i],path,50,72);
+        loadimage(&imgs_selectCard[i],path,50,72);
+        loadimage(&imgs_gameCard[i],path,60,85);
     }
-    loadimage(&img_cardMask,"res/imgs/cardMask.png",50,72);
+    loadimage(&img_selectCardMask,"res/imgs/cardMask.png",50,72);
+    loadimage(&img_gameCardMask,"res/imgs/cardMask.png",60,85);
 
-    for(int i=0;i<atl_plants.size();i++){
+    for(int i=0;i<atls_plants.size();i++){
         TCHAR path[64];
         sprintf_s(path,"res/plant/%s",plantNameList[i]);
         int num= getFileNum(path);
-        atl_plants[i].loadFromFile(path,num);
+        atls_plants[i].loadFromFile(path,num);
     }
+    atl_sunShine.loadFromFile("res/sunshine",getFileNum("res/sunshine"));
 }
 
 bool res::checkfile(const char *name) {
@@ -49,10 +53,11 @@ bool res::checkfile(const char *name) {
 }
 
 res::res() {
-    atl_plants.resize(PLANT_COUNT);
+    atls_plants.resize(PLANT_COUNT);
     imgs_startButton.resize(3);
     imgs_fightButton.resize(3);
-    imgs_card.resize(getFileNum("res/Cards/"));
+    imgs_selectCard.resize(getFileNum("res/Cards/"));
+    imgs_gameCard.resize(getFileNum("res/Cards/"));
 }
 
 int res::getFileNum(const char *filePath) {

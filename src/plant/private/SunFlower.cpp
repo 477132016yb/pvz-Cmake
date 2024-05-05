@@ -7,7 +7,7 @@
 SunFlower::SunFlower() {
     SunFlower::m_cost=m_cost=50;
     SunFlower::m_type=plantType::SunFlower;
-    SunFlower::m_atls= std::make_shared<Atlas>(Singleton<res>::instanceSP()->atl_plants[int(m_type)]);
-    this->m_action->setAtlas(SunFlower::m_atls);
+    Atlas::SP atlas= std::make_shared<Atlas>(Singleton<res>::instanceSP()->atls_plants[int(m_type)]);
+    this->m_action->setAtlas(atlas);
     this->m_action->setLoop(true);
 }
