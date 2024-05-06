@@ -26,10 +26,10 @@ public:
     int m_blood=100;
     Animation::SP m_action;
 public:
-    static plantType m_type;
-    static int m_cost;
+    static plantType s_type;
+    static int s_cost;
 protected:
-    static int m_dy;
+    static int s_dy;
 };
 
 #endif //PVZ_PLANT_H

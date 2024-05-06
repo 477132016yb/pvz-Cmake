@@ -4,7 +4,9 @@
 
 #include "../public/GameScene.h"
 #include "PeaShooter.h"
+#include "SunShine.h"
 REGISTER_CLASS(PeaShooter);
+REGISTER_CLASS(SunShine);
 extern std::vector<const char*>plantNameList;
 extern std::vector<int> g_selectNum;
 void GameScene::on_draw() {
@@ -17,17 +19,9 @@ void GameScene::on_draw() {
         int y=8;
         putimage(x,y,m_cardVault[num]);
     }
+    drawVector(m_sunShinePool);
     for(auto&a:m_plantMap){
-        for(auto&b:a){
-            if(b){
-//                b->draw();
-            }
-        }
-    }
-    for(auto&a:m_sunShinePool){
-        if(a){
-            a->draw();
-        }
+        drawVector(a);
     }
 }
 
@@ -40,18 +34,11 @@ void GameScene::on_enter() {
 
 void GameScene::on_update(int delta) {
     creatObject(delta);
+    updateMemory();
     for(auto&a:m_plantMap){
-        for(auto&b:a){
-            if(b){
-                b->update(delta);
-            }
-        }
+        updateVector(a,delta);
     }
-    for(auto&a:m_sunShinePool){
-        if(a){
-            a->update(delta);
-        }
-    }
+    updateVector(m_sunShinePool,delta);
 }
 
 void GameScene::on_input(const ExMessage &msg) {
@@ -65,6 +52,7 @@ void GameScene::on_exit() {
 }
 
 GameScene::GameScene() {
+    init();
     srand(time(nullptr));
     res::SP r=Singleton<res>::instanceSP();
     m_bg=&r->img_bg;
@@ -84,14 +72,9 @@ void GameScene::creatSunShine(int delta) {
     static int fre = 10;
     if (count > fre) {
         count = 0;
-        fre = 5000 + rand() % 2000;
-//        int i = 0;
-//        while (i<m_sunShinePool.size()&&m_sunShinePool[i]->m_used) { i++; }
-//        if (i >= m_sunShinePool.size()) { return; }
-//        SunShine::SP a = m_sunShinePool[i];
-
-        SunShine* a=new SunShine();
-        a->m_used = true;
+        fre = SunShine::s_creatTime + rand() % 2000;
+        ClassFactory* factory = Singleton<ClassFactory>::instance();
+        SunShine*a = dynamic_cast<SunShine*>(factory->create_class("SunShine"));
         a->m_status = SunShine::SunStatus::SUNSHINE_DOWN;
         a->p1 = vector2(260 + rand() % 540, 60);
         a->p4 = vector2(a->p1.x, 230 + (rand() % 4) * 90);
@@ -105,5 +88,13 @@ void GameScene::creatSunShine(int delta) {
 
 void GameScene::creatObject(int delta) {
     creatSunShine(delta);
+}
+
+void GameScene::updateMemory() {
+    clearVector(m_sunShinePool);
+}
+
+void GameScene::init() {
+    PeaShooter::init();
 }
 

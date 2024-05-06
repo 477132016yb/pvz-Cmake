@@ -8,6 +8,7 @@
 class PeaShooter :public plant{
 public:
     PeaShooter();
+    static void init();
 public:
 };
 

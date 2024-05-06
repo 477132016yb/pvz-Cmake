@@ -9,6 +9,7 @@
 class SunFlower: public plant{
 public:
     SunFlower();
+    static void init();
 };
 
 

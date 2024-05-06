@@ -8,7 +8,6 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "Object.h"
-#include "SunShine.h"
 
 class GameScene :public Scene{
 public:
@@ -21,11 +20,13 @@ public:
     void on_input(const ExMessage& msg) override;
     void on_exit() override;
 public:
+    void init();
+    void updateMemory();
     void creatObject(int delta);
     void creatSunShine(int delta);//´´½¨Ñô¹â
 private:
     std::vector<std::vector<Object*>>m_plantMap;
-    std::vector<SunShine*>m_sunShinePool;
+    std::vector<Object*>m_sunShinePool;
 
     std::vector<IMAGE*>m_cardVault;
     IMAGE *m_bg;

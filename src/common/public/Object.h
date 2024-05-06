@@ -17,6 +17,7 @@ public:
     std::string getName();
 public:
     int m_x{},m_y{};
+    bool m_used=true;
     static const vector2& m_CameraPos;
     virtual void draw(){};
     virtual void update(int delta){};
