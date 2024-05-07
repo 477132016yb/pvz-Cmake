@@ -8,7 +8,6 @@
 class PeaShooter :public plant{
 public:
     PeaShooter();
-    static void init();
 private:
     static plantType s_type;
     static int s_cost;

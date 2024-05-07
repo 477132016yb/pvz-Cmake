@@ -102,21 +102,19 @@ void ObjManager::input(const ExMessage &msg) {
 
 void ObjManager::checkSunShine(const ExMessage &msg) {
     for(auto&a:m_sunShinePool){
-        if(a){
-            if(yb::checkHit(msg.x,msg.y,a->m_x+5,a->m_y+5,60,60)){
-                SunShine*b = dynamic_cast<SunShine*>(a);
-                if(b){
-                    b->m_status = SunShine::SunStatus::SUNSHINE_COLLECT;
-                    b->m_t = 0;
-                    b->p1.x = b->m_curp.x;
-                    b->p1.y = b->m_curp.y;
-                    b->p4 = vector2(150, 0);
-                    float distance = (b->p1 - b->p4).dis();
-                    float off = 50;
-                    b->m_speed = 1.0/(distance/off);
-                    m_sun+=25;
-                }
-            }
+        if(!a){ continue;}
+        if(yb::checkHit(msg.x,msg.y,a->m_x+5,a->m_y+5,60,60)){
+            SunShine*b = dynamic_cast<SunShine*>(a);
+            if(!b){ continue;}
+            b->m_status = SunShine::SunStatus::SUNSHINE_COLLECT;
+            b->m_t = 0;
+            b->p1.x = b->m_curp.x;
+            b->p1.y = b->m_curp.y;
+            b->p4 = vector2(150, 0);
+            float distance = (b->p1 - b->p4).dis();
+            float off = 50;
+            b->m_speed = 1.0/(distance/off);
+            m_sun+=25;
         }
     }
 }
@@ -131,20 +129,19 @@ void ObjManager::creatObject(int delta) {
 
 void ObjManager::creatSunShine(int delta) {
     static int count = 0;
-    count+=delta;
+    count += delta;
     static int fre = 10;
-    if (count > fre) {
-        count = 0;
-        fre = SunShine::s_creatTime + rand() % 2000;
-        ClassFactory* factory = Singleton<ClassFactory>::instance();
-        SunShine*a = dynamic_cast<SunShine*>(factory->create_class("SunShine"));
-        a->m_status = SunShine::SunStatus::SUNSHINE_DOWN;
-        a->p1 = vector2(260 + rand() % 540, 60);
-        a->p4 = vector2(a->p1.x, 230 + (rand() % 4) * 90);
-        a->m_t=0;
-        float distance = (a->p1 - a->p4).dis();
-        float off = 1;
-        a->m_speed = 1.0 / (distance / off);
-        m_sunShinePool.push_back(a);
-    }
+    if (count <=fre) {return;}
+    count = 0;
+    fre = SunShine::s_creatTime + rand() % 2000;
+    ClassFactory* factory = Singleton<ClassFactory>::instance();
+    SunShine*a = dynamic_cast<SunShine*>(factory->create_class("SunShine"));
+    a->m_status = SunShine::SunStatus::SUNSHINE_DOWN;
+    a->p1 = vector2(260 + rand() % 540, 60);
+    a->p4 = vector2(a->p1.x, 230 + (rand() % 4) * 90);
+    a->m_t=0;
+    float distance = (a->p1 - a->p4).dis();
+    float off = 1;
+    a->m_speed = 1.0 / (distance / off);
+    m_sunShinePool.push_back(a);
 }
