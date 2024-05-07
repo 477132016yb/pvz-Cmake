@@ -9,7 +9,9 @@
 class SunFlower: public plant{
 public:
     SunFlower();
-    static void init();
+private:
+    static plantType s_type;
+    static int s_cost;
 };
 
 

@@ -9,7 +9,9 @@ class PeaShooter :public plant{
 public:
     PeaShooter();
     static void init();
-public:
+private:
+    static plantType s_type;
+    static int s_cost;
 };
 
 #endif //PVZ_PEASHOOTER_H

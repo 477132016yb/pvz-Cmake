@@ -4,10 +4,10 @@
 
 #ifndef PVZ_GAMESCENE_H
 #define PVZ_GAMESCENE_H
-#include <time.h>
 #include "Scene.h"
 #include "SceneManager.h"
-#include "Object.h"
+#include "ObjManager.h"
+
 
 class GameScene :public Scene{
 public:
@@ -19,19 +19,8 @@ public:
     void on_draw() override;
     void on_input(const ExMessage& msg) override;
     void on_exit() override;
-public:
-    void init();
-    void updateMemory();
-    void creatObject(int delta);
-    void creatSunShine(int delta);//´´½¨Ñô¹â
 private:
-    std::vector<std::vector<Object*>>m_plantMap;
-    std::vector<Object*>m_sunShinePool;
-
-    std::vector<IMAGE*>m_cardVault;
-    IMAGE *m_bg;
-    IMAGE *m_cardBar;
-    IMAGE *m_cardMask;
+    ObjManager::SP m_objManager;
 };
 
 #endif //PVZ_GAMESCENE_H

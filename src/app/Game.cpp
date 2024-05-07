@@ -10,7 +10,7 @@ void Game::play() {
     init();
     ExMessage msg;
     BeginBatchDraw();
-    m_sceneManager->setCurrentState(g_menuSence);
+    m_sceneManager->setCurrentState(g_gameSence);
     while (true) {
         DWORD frame_start_time=GetTickCount();
         while(peekmessage(&msg)){
@@ -38,6 +38,15 @@ void Game::play() {
 void Game::init() {
     m_r->init();
     initgraph(WIN_WIDTH,WIN_HEIGHT);
+    LOGFONT f;
+    gettextstyle(&f);
+    strcpy(f.lfFaceName, "Segoe UI Black");
+    f.lfQuality = ANTIALIASED_QUALITY;//¿¹¾â³Ý
+    f.lfHeight = 25;
+    f.lfWidth = 10;
+    settextstyle(&f);
+    setbkmode(TRANSPARENT);
+    setcolor(BLACK);
 }
 
 Game::Game() {

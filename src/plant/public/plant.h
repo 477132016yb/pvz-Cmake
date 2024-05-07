@@ -25,11 +25,6 @@ public:
     int m_row{},m_col{};
     int m_blood=100;
     Animation::SP m_action;
-public:
-    static plantType s_type;
-    static int s_cost;
-protected:
-    static int s_dy;
 };
 
 #endif //PVZ_PLANT_H
