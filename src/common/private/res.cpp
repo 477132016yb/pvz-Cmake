@@ -3,13 +3,9 @@
 //
 
 #include "res.h"
-std::vector<const char*>plantNameList{
-        "PeaShooter","SunFlower"
-};
 std::vector<const char*>buttonName{
         "idle","hovered","pushed"
 };
-#define PLANT_COUNT plantNameList.size()
 void res::init() {
     loadimage(&img_bg,"res/map/bg.jpg");
     loadimage(&img_menu,"res/map/menu.png");
@@ -35,15 +31,16 @@ void res::init() {
         loadimage(&imgs_gameCard[i],path,60,85);
     }
     loadimage(&img_selectCardMask,"res/imgs/cardMask.png",50,72);
-    loadimage(&img_gameCardMask,"res/imgs/cardMask.png",60,85);
+    loadimage(&img_gameCardMask,"res/imgs/cardLoad.png",60,85);
 
     for(int i=0;i<atls_plants.size();i++){
         TCHAR path[64];
-        sprintf_s(path,"res/plant/%s",plantNameList[i]);
+        sprintf_s(path,"res/plant/%s",yb::plantNameList[i]);
         int num= getFileNum(path);
         atls_plants[i].loadFromFile(path,num);
     }
     atl_sunShine.loadFromFile("res/sunshine",getFileNum("res/sunshine"));
+    atl_cardCoolTime.loadFromFile2("res/imgs/cardCoolTime",getFileNum("res/imgs/cardCoolTime"));
 }
 
 bool res::checkfile(const char *name) {
@@ -58,6 +55,7 @@ res::res() {
     imgs_fightButton.resize(3);
     imgs_selectCard.resize(getFileNum("res/Cards/"));
     imgs_gameCard.resize(getFileNum("res/Cards/"));
+    init();
 }
 
 int res::getFileNum(const char *filePath) {

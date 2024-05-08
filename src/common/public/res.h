@@ -27,6 +27,7 @@ public:
     std::vector<IMAGE>imgs_selectCard,imgs_gameCard;
     std::vector<Atlas>atls_plants;
     Atlas atl_sunShine;
+    Atlas atl_cardCoolTime;
 };
 
 

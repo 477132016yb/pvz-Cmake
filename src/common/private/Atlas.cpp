@@ -26,7 +26,7 @@ int Atlas::getSize() {
 
 IMAGE *Atlas::getImage(int idx) {
     if(idx<0||idx>=m_imgList.size()){
-        return nullptr;
+        throw 0;
     }
     return &m_imgList[idx];
 }
@@ -37,4 +37,15 @@ void Atlas::addImage(const IMAGE &img) {
 
 Atlas::~Atlas() {
 
+}
+
+void Atlas::loadFromFile2(LPCTSTR path, int num) {
+    m_imgList.clear();
+    m_imgList.resize(num);
+
+    TCHAR path_file[64];
+    for(int i=0;i<num;i++){
+        sprintf_s(path_file,"%s/%d.png",path,i);
+        loadimage(&m_imgList[i],path_file,60,85);
+    }
 }

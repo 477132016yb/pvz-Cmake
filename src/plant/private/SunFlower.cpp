@@ -3,7 +3,6 @@
 //
 
 #include "SunFlower.h"
-int SunFlower::s_cost=50;
 plant::plantType SunFlower::s_type=plantType::SunFlower;
 
 SunFlower::SunFlower() {
@@ -11,4 +10,8 @@ SunFlower::SunFlower() {
     this->m_action->setAtlas(atlas);
     this->m_action->setLoop(true);
     this->m_action->setInterval(75);
+}
+
+plant::plantType SunFlower::getType() {
+    return s_type;
 }

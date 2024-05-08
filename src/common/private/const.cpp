@@ -2,8 +2,13 @@
 // Created by yb on 2024/5/7.
 //
 #include "const.h"
-using namespace yb;
-bool yb::checkHit(int x, int y, int objX, int objy, int objW, int objH) {
-    return x>objX&&x<objX+objW&&y>objy&&y<objy+objH;
+namespace yb{
+    bool checkHit(int x, int y, int objX, int objy, int objW, int objH) {
+        return x>objX&&x<objX+objW&&y>objy&&y<objy+objH;
+    }
+    std::vector<int> plantCostList = {100,50};
+    std::vector<int> plantCoolTimeList = {150,200};
+    std::vector<const char*>plantNameList={
+    "PeaShooter","SunFlower"
+    };
 }
-

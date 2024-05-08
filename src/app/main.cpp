@@ -1,5 +1,10 @@
 #include "Game.h"
 int main() {
     Game a;
-    a.play();
+    try{
+        a.play();
+    }
+    catch (std::exception& e){
+        LOG(e.what());
+    }
 }

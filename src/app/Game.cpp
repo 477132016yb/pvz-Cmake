@@ -36,7 +36,6 @@ void Game::play() {
 }
 
 void Game::init() {
-    m_r->init();
     initgraph(WIN_WIDTH,WIN_HEIGHT);
     LOGFONT f;
     gettextstyle(&f);

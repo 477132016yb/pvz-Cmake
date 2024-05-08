@@ -9,20 +9,30 @@
 REGISTER_CLASS(PeaShooter);
 REGISTER_CLASS(SunShine);
 REGISTER_CLASS(SunFlower);
-extern std::vector<const char*>plantNameList;
 extern std::vector<int> g_selectNum;
+ClassFactory* g_factory=Singleton<ClassFactory>::instance();
 ObjManager::ObjManager() {
-    m_sun=50;
+    m_sun= 50;
     m_cur= nullptr;
     srand(time(nullptr));
     res::SP r=Singleton<res>::instanceSP();
+    int n=r->imgs_gameCard.size();
     m_bg=&r->img_bg;
     m_cardBar=&r->img_gameBar;
-    m_cardVault.resize(r->imgs_gameCard.size());
-    for(int i=0;i<m_cardVault.size();i++){
+    m_cardVault.resize(n);
+    for(int i=0;i<n;i++){
         m_cardVault[i]=&r->imgs_gameCard[i];
     }
     m_cardMask=&r->img_gameCardMask;
+
+    m_cardCoolAtion.resize(g_selectNum.size());
+    Atlas::SP atlas=std::make_shared<Atlas>(r->atl_cardCoolTime);
+    for(int i=0;i<m_cardCoolAtion.size();i++){
+        m_cardCoolAtion[i]=std::make_shared<Animation>();
+        m_cardCoolAtion[i]->setAtlas(atlas);
+        m_cardCoolAtion[i]->setInterval(yb::plantCoolTimeList[g_selectNum[i]]);
+        m_cardCoolAtion[i]->setLoop(false);
+    }
 
     m_plantMap = std::vector<std::vector<Object*>>(5, std::vector<Object*>(10,nullptr));
 }
@@ -34,6 +44,7 @@ void ObjManager::update(int delta) {
         yb::updateVector(a,delta);
     }
     yb::updateVector(m_sunShinePool,delta);
+    for(auto&a:m_cardCoolAtion){a->update(delta);}
 }
 
 void ObjManager::draw() {
@@ -50,6 +61,10 @@ void ObjManager::draw() {
         int x=339 - 112+i*(m_cardVault[num]->getwidth()+5);
         int y=8;
         putimage(x,y,m_cardVault[num]);
+        if(m_sun<yb::plantCostList[g_selectNum[i]]){
+            putimagePNG(x,y,m_cardMask);
+        }
+        m_cardCoolAtion[i]->draw(x,y);
     }
     for(auto&a:m_plantMap){
         yb::drawVector(a);
@@ -61,13 +76,30 @@ void ObjManager::draw() {
 }
 
 void ObjManager::input(const ExMessage &msg) {
-    static int idx = 0;
-    ClassFactory* factory = Singleton<ClassFactory>::instance();
+    static int idx = -1;
     switch (msg.message) {
         case WM_LBUTTONDOWN:
             if (!m_cur&&msg.x > 227 && msg.x < 227 + 64 * g_selectNum.size() && msg.y < 96 && msg.y>8) {
                 idx = (msg.x - (227)) / 64;
-                m_cur = factory->create_class(plantNameList[g_selectNum[idx]]);
+                if(m_sun<yb::plantCostList[g_selectNum[idx]]||!m_cardCoolAtion[idx]->checkFinished()){ break;}
+                m_cur = g_factory->create_class(yb::plantNameList[g_selectNum[idx]]);
+            }
+            else if(m_cur){
+                int x = msg.x;
+                int y = msg.y;
+                if (x > 144 && y > 77 && y < 591) {
+                    int row = (y - 77) / 102;
+                    int col = (x - 144) / 81;
+                    if (m_cur&&(!m_plantMap[row][col])&&idx!=-1) {
+                        m_cur->m_y = 77 + row * 102;
+                        m_cur->m_x = 144 + col * 81;
+                        m_plantMap[row][col] = m_cur;
+                        m_sun-=yb::plantCostList[idx];
+                        m_cardCoolAtion[idx]->reset();
+                        m_cur= nullptr;
+                        idx=-1;
+                    }
+                }
             }
             else{
                 checkSunShine(msg);
@@ -80,20 +112,6 @@ void ObjManager::input(const ExMessage &msg) {
             }
             break;
         case WM_LBUTTONUP:
-        {
-            int x = msg.x;
-            int y = msg.y;
-            if (x > 144 && y > 77 && y < 591) {
-                int row = (y - 77) / 102;
-                int col = (x - 144) / 81;
-                if (m_cur&&(!m_plantMap[row][col]) ) {
-                    m_cur->m_y = 77 + row * 102;
-                    m_cur->m_x = 144 + col * 81;
-                    m_plantMap[row][col] = m_cur;
-                }
-            }
-            m_cur= nullptr;
-        }
             break;
         default:
             break;
@@ -104,7 +122,7 @@ void ObjManager::checkSunShine(const ExMessage &msg) {
     for(auto&a:m_sunShinePool){
         if(!a){ continue;}
         if(yb::checkHit(msg.x,msg.y,a->m_x+5,a->m_y+5,60,60)){
-            SunShine*b = dynamic_cast<SunShine*>(a);
+            auto*b = dynamic_cast<SunShine*>(a);
             if(!b){ continue;}
             b->m_status = SunShine::SunStatus::SUNSHINE_COLLECT;
             b->m_t = 0;
@@ -134,8 +152,7 @@ void ObjManager::creatSunShine(int delta) {
     if (count <=fre) {return;}
     count = 0;
     fre = SunShine::s_creatTime + rand() % 2000;
-    ClassFactory* factory = Singleton<ClassFactory>::instance();
-    SunShine*a = dynamic_cast<SunShine*>(factory->create_class("SunShine"));
+    SunShine*a = dynamic_cast<SunShine*>(g_factory->create_class("SunShine"));
     a->m_status = SunShine::SunStatus::SUNSHINE_DOWN;
     a->p1 = vector2(260 + rand() % 540, 60);
     a->p4 = vector2(a->p1.x, 230 + (rand() % 4) * 90);

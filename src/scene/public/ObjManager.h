@@ -8,6 +8,7 @@
 #include "Object.h"
 #include <ctime>
 #include "SceneManager.h"
+#include "Animation.h"
 class ObjManager {
 public:
     using SP=std::shared_ptr<ObjManager>;
@@ -28,6 +29,7 @@ private:
     std::vector<std::vector<Object*>>m_plantMap;
     std::vector<Object*>m_sunShinePool;
 
+    std::vector<Animation::SP>m_cardCoolAtion;
     std::vector<IMAGE*>m_cardVault;
     IMAGE *m_bg;
     IMAGE *m_cardBar;

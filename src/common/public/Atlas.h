@@ -15,6 +15,7 @@ public:
     ~Atlas();
 public:
     void loadFromFile(LPCTSTR path,int num);
+    void loadFromFile2(LPCTSTR path,int num);
     void clear();
     int getSize();
     IMAGE*getImage(int idx);

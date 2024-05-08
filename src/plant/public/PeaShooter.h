@@ -8,9 +8,10 @@
 class PeaShooter :public plant{
 public:
     PeaShooter();
+public:
+    plantType getType() override;
 private:
     static plantType s_type;
-    static int s_cost;
 };
 
 #endif //PVZ_PEASHOOTER_H

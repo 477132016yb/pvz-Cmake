@@ -9,9 +9,10 @@
 class SunFlower: public plant{
 public:
     SunFlower();
+public:
+    plantType getType() override;
 private:
     static plantType s_type;
-    static int s_cost;
 };
 
 

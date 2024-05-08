@@ -10,10 +10,14 @@
 #define WIN_HEIGHT 600
 #define FPS 90
 #define LOG(a) std::cout<<a<<std::endl
+#define PLANT_COUNT yb::plantNameList.size()
 typedef unsigned long long uint64_t;
 namespace yb {
-    bool checkHit(int x,int y,int objX,int objy,int objW,int objH);
+    extern std::vector<int>plantCoolTimeList;
+    extern std::vector<int>plantCostList;
+    extern std::vector<const char*>plantNameList;
 
+    bool checkHit(int x,int y,int objX,int objy,int objW,int objH);
 
     template<typename T>
     void clearVector(std::vector<T*>&vec){
