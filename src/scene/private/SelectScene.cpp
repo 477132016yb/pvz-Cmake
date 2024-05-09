@@ -2,7 +2,7 @@
 // Created by yb on 2024/5/2.
 //
 
-#include "../public/SelectScene.h"
+#include "SelectScene.h"
 extern std::vector<int> g_selectNum;
 SelectScene::SelectScene() {
     res::SP r=Singleton<res>::instanceSP();

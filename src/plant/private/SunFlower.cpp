@@ -3,6 +3,8 @@
 //
 
 #include "SunFlower.h"
+#include "SunShine.h"
+#include "ObjManager.h"
 plant::plantType SunFlower::s_type=plantType::SunFlower;
 
 SunFlower::SunFlower() {
@@ -10,8 +12,18 @@ SunFlower::SunFlower() {
     this->m_action->setAtlas(atlas);
     this->m_action->setLoop(true);
     this->m_action->setInterval(75);
+    this->m_sunSpeed=8000;
 }
 
 plant::plantType SunFlower::getType() {
     return s_type;
+}
+
+void SunFlower::skills(int delta) {
+    m_skillTime+=delta;
+    if(m_skillTime<m_sunSpeed){return;}
+    m_skillTime = 0;
+    SunShine*a = SunShine::creatSunShine(m_x,m_y);
+    std::vector<Object*>&vec = Singleton<ObjManager>::instanceSP()->getSunShineVec();
+    vec.push_back(a);
 }

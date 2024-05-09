@@ -7,7 +7,7 @@ namespace yb{
         return x>objX&&x<objX+objW&&y>objy&&y<objy+objH;
     }
     std::vector<int> plantCostList = {100,50};
-    std::vector<int> plantCoolTimeList = {150,200};
+    std::vector<int> plantCoolTimeList = {100,100};
     std::vector<const char*>plantNameList={
     "PeaShooter","SunFlower"
     };

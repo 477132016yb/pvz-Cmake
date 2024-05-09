@@ -2,7 +2,7 @@
 // Created by yb on 2024/4/30.
 //
 
-#include "../public/SceneManager.h"
+#include "SceneManager.h"
 //std::vector<int> g_selectNum=std::vector<int>(8,-1);
 std::vector<int> g_selectNum=std::vector<int>{0,1};
 void SceneManager::setCurrentState(Scene *scene) {

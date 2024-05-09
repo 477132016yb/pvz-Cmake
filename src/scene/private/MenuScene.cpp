@@ -2,7 +2,7 @@
 // Created by yb on 2024/4/30.
 //
 
-#include "../public/MenuScene.h"
+#include "MenuScene.h"
 void MenuScene::on_enter() {
     LOG("进入主菜单");
     m_startButton->reSet();

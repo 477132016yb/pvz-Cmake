@@ -9,16 +9,19 @@
 #include <ctime>
 #include "SceneManager.h"
 #include "Animation.h"
+#include "StaticObj.h"
 class ObjManager {
 public:
     using SP=std::shared_ptr<ObjManager>;
     ObjManager();
-    ~ObjManager()=default;
+    ~ObjManager();
+    std::vector<Object*>& getSunShineVec();
 public:
     void update(int delta);
     void draw();
     void input(const ExMessage& msg);
 private:
+    void processLeftButton(const ExMessage& msg);
     void checkSunShine(const ExMessage& msg);
     void updateMemory();
     void creatObject(int delta);
@@ -26,14 +29,19 @@ private:
 private:
     int m_sun;
     Object*m_cur;
+    StaticObj *m_shovelObj;
     std::vector<std::vector<Object*>>m_plantMap;
     std::vector<Object*>m_sunShinePool;
 
     std::vector<Animation::SP>m_cardCoolAtion;
     std::vector<IMAGE*>m_cardVault;
+    std::vector<IMAGE*>m_vriPlantVec;
     IMAGE *m_bg;
     IMAGE *m_cardBar;
     IMAGE *m_cardMask;
+    IMAGE *m_shovelSlot;
+    StaticObj *m_virtualPlant;
+    bool m_isMove;//鼠标是否在移动
 };
 
 

@@ -11,8 +11,11 @@ public:
     SunFlower();
 public:
     plantType getType() override;
+    void skills(int delta)override;
 private:
     static plantType s_type;
+private:
+    int m_sunSpeed;
 };
 
 

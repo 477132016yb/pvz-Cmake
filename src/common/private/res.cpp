@@ -12,6 +12,9 @@ void res::init() {
     loadimage(&img_PanelBackGround,"res/map/PanelBackGround.png");
     loadimage(&img_gameBar,"res/imgs/gameBar.png");
     loadimage(&img_selectBar,"res/imgs/selectBar.png");
+    loadimage(&img_shovel,"res/imgs/shovel.png");
+    loadimage(&img_shovelSlot,"res/imgs/shovelSlot.png");
+    loadimage(&img_v,"res/imgs/1.png");
 
     for(int i=0;i<imgs_startButton.size();i++){
         TCHAR path[64];
@@ -24,6 +27,11 @@ void res::init() {
         loadimage(&imgs_fightButton[i],path);
     }
 
+    for(int i=0;i<imgs_vriPlantVec.size();i++){
+        TCHAR path[64];
+        sprintf_s(path,"res/imgs/vritual/%d.png",i+1);
+        loadimage(&imgs_vriPlantVec[i],path);
+    }
     for(int i=0;i<imgs_selectCard.size();i++){
         TCHAR path[64];
         sprintf_s(path,"res/Cards/%d.png",i+1);
@@ -55,6 +63,7 @@ res::res() {
     imgs_fightButton.resize(3);
     imgs_selectCard.resize(getFileNum("res/Cards/"));
     imgs_gameCard.resize(getFileNum("res/Cards/"));
+    imgs_vriPlantVec.resize(getFileNum("res/imgs/vritual"));
     init();
 }
 

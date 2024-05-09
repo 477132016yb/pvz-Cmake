@@ -2,7 +2,7 @@
 // Created by yb on 2024/4/30.
 //
 
-#include "../public/GameScene.h"
+#include "GameScene.h"
 void GameScene::on_draw() {
     m_objManager->draw();
 }
@@ -24,6 +24,6 @@ void GameScene::on_exit() {
 }
 
 GameScene::GameScene() {
-    m_objManager=std::make_shared<ObjManager>();
+    m_objManager=Singleton<ObjManager>::instanceSP();
 }
 

@@ -18,9 +18,10 @@ public:
     };
 public:
     plant();
-    ~plant()=default;
+    ~plant() override =default;
     void update(int delta) override;
     void draw() override;
+    virtual void skills(int delta){};
 public:
     virtual plantType getType()=0;
 public:
@@ -28,6 +29,7 @@ public:
     int m_blood=100;
 protected:
     Animation::SP m_action;
+    int m_skillTime;
 };
 
 #endif //PVZ_PLANT_H

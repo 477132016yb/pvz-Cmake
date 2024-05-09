@@ -22,9 +22,13 @@ public:
     IMAGE img_PanelBackGround;
     IMAGE img_selectBar,img_gameBar;
     IMAGE img_selectCardMask,img_gameCardMask;
+    IMAGE img_shovel,img_shovelSlot;
+    IMAGE img_v;
+
     std::vector<IMAGE>imgs_startButton;
     std::vector<IMAGE>imgs_fightButton;
     std::vector<IMAGE>imgs_selectCard,imgs_gameCard;
+    std::vector<IMAGE>imgs_vriPlantVec;
     std::vector<Atlas>atls_plants;
     Atlas atl_sunShine;
     Atlas atl_cardCoolTime;
