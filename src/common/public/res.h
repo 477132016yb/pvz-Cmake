@@ -23,7 +23,10 @@ public:
     IMAGE img_selectBar,img_gameBar;
     IMAGE img_selectCardMask,img_gameCardMask;
     IMAGE img_shovel,img_shovelSlot;
-    IMAGE img_v;
+    IMAGE img_bulletNormal,img_bulletCool,img_bulletFire;
+    std::vector<IMAGE>imgs_BlastNormal,imgs_BlastCool;
+
+
 
     std::vector<IMAGE>imgs_startButton;
     std::vector<IMAGE>imgs_fightButton;

@@ -26,7 +26,6 @@ public:
     virtual plantType getType()=0;
 public:
     int m_row{},m_col{};
-    int m_blood=100;
 protected:
     Animation::SP m_action;
     int m_skillTime;

@@ -16,11 +16,14 @@ public:
     void SetName(const std::string& cName);
     std::string getName();
 public:
-    int m_x{},m_y{};
-    bool m_used=true;
-    static const vector2& m_CameraPos;
     virtual void draw(){};
     virtual void update(int delta){};
+    virtual bool collide(Object*obj){return false;};
+public:
+    int m_x{},m_y{};
+    int m_blood=100;
+    bool m_used=true;
+    static const vector2& m_CameraPos;
 public:
     std::string className;
 };

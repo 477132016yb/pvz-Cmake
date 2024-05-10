@@ -57,6 +57,7 @@ void ObjManager::update(int delta) {
         yb::updateVector(a,delta);
     }
     yb::updateVector(m_sunShinePool,delta);
+    yb::updateVector(m_bulletPool,delta);
     for(auto&a:m_cardCoolAtion){a->update(delta);}
 }
 
@@ -91,6 +92,7 @@ void ObjManager::draw() {
         m_cur->draw();
     }
     yb::drawVector(m_sunShinePool);
+    yb::drawVector(m_bulletPool);
 }
 
 void ObjManager::input(const ExMessage &msg) {
@@ -121,6 +123,7 @@ void ObjManager::input(const ExMessage &msg) {
         case WM_RBUTTONDOWN:
             if(m_cur){
                 m_cur = nullptr;
+                m_virtualPlant= nullptr;
                 m_shovelObj->m_x=760,m_shovelObj->m_y=-10;
             }
             break;
@@ -137,14 +140,7 @@ void ObjManager::checkSunShine(const ExMessage &msg) {
         if(yb::checkHit(msg.x,msg.y,a->m_x+5,a->m_y+5,60,60)){
             auto*b = dynamic_cast<SunShine*>(a);
             if(!b){ continue;}
-            b->m_status = SunShine::SunStatus::SUNSHINE_COLLECT;
-            b->m_t = 0;
-            b->p1.x = b->m_curp.x;
-            b->p1.y = b->m_curp.y;
-            b->p4 = vector2(150, 0);
-            float distance = (b->p1 - b->p4).dis();
-            float off = 50;
-            b->m_speed = 1.0/(distance/off);
+            b->collect();
             m_sun+=25;
         }
     }
@@ -152,6 +148,7 @@ void ObjManager::checkSunShine(const ExMessage &msg) {
 
 void ObjManager::updateMemory() {
     yb::clearVector(m_sunShinePool);
+    yb::clearVector(m_bulletPool);
 }
 
 void ObjManager::creatObject(int delta) {
@@ -199,7 +196,9 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
             if (m_cur&&(!m_plantMap[row][col])&&idx!=-1) {//Ö²ÎïÖÖÏÂ
                 m_cur->m_y = 77 + row * 102;
                 m_cur->m_x = 144 + col * 81;
-                m_plantMap[row][col] = m_cur;
+                auto a= dynamic_cast<plant*>(m_cur);
+                a->m_row=row,a->m_col=col;
+                m_plantMap[row][col] = a;
                 m_sun-=yb::plantCostList[idx];
                 m_cardCoolAtion[idx]->reset();
                 m_cur= nullptr;
@@ -216,5 +215,9 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
     else{
         checkSunShine(msg);
     };
+}
+
+std::vector<Object *> &ObjManager::getBulletVec() {
+    return m_bulletPool;
 }
 

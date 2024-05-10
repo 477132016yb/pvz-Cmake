@@ -16,6 +16,7 @@ public:
     ObjManager();
     ~ObjManager();
     std::vector<Object*>& getSunShineVec();
+    std::vector<Object*>& getBulletVec();
 public:
     void update(int delta);
     void draw();
@@ -32,6 +33,7 @@ private:
     StaticObj *m_shovelObj;
     std::vector<std::vector<Object*>>m_plantMap;
     std::vector<Object*>m_sunShinePool;
+    std::vector<Object*>m_bulletPool;
 
     std::vector<Animation::SP>m_cardCoolAtion;
     std::vector<IMAGE*>m_cardVault;

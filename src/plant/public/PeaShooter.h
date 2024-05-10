@@ -10,8 +10,10 @@ public:
     PeaShooter();
 public:
     plantType getType() override;
+    void skills(int delta)override;
 private:
     static plantType s_type;
+    int m_creatSpeed;
 };
 
 #endif //PVZ_PEASHOOTER_H

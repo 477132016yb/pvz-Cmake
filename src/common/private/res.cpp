@@ -14,7 +14,17 @@ void res::init() {
     loadimage(&img_selectBar,"res/imgs/selectBar.png");
     loadimage(&img_shovel,"res/imgs/shovel.png");
     loadimage(&img_shovelSlot,"res/imgs/shovelSlot.png");
-    loadimage(&img_v,"res/imgs/1.png");
+    loadimage(&img_bulletNormal,"res/imgs/bullets/Normal.png");
+    loadimage(&img_bulletCool,"res/imgs/bullets/Cool.png");
+    loadimage(&img_bulletFire,"res/imgs/bullets/Fire.png");
+    for (int i = 0; i < imgs_BlastNormal.size(); i++) {
+        float k = (i + 1) * 0.2;
+        loadimage(&imgs_BlastNormal[i], "res/imgs/bullets/bullet_blast.png",
+                  img_bulletNormal.getwidth() * k, img_bulletNormal.getheight() * k, true);
+        loadimage(&imgs_BlastCool[i], "res/imgs/bullets/bullet_blast_bing.png",
+                  img_bulletCool.getwidth() * k, img_bulletCool.getheight() * k, true);
+    }
+
 
     for(int i=0;i<imgs_startButton.size();i++){
         TCHAR path[64];
@@ -64,6 +74,8 @@ res::res() {
     imgs_selectCard.resize(getFileNum("res/Cards/"));
     imgs_gameCard.resize(getFileNum("res/Cards/"));
     imgs_vriPlantVec.resize(getFileNum("res/imgs/vritual"));
+    imgs_BlastCool.resize(4);
+    imgs_BlastNormal.resize(4);
     init();
 }
 
