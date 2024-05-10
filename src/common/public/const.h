@@ -11,11 +11,13 @@
 #define FPS 90
 #define LOG(a) std::cout<<a<<std::endl
 #define PLANT_COUNT yb::plantNameList.size()
+#define ZOMBIE_COUNT yb::zombieNameList.size()
 typedef unsigned long long uint64_t;
 namespace yb {
     extern std::vector<int>plantCoolTimeList;
     extern std::vector<int>plantCostList;
     extern std::vector<const char*>plantNameList;
+    extern std::vector<const char*>zombieNameList;
 
     bool checkHit(int x,int y,int objX,int objy,int objW,int objH);
 

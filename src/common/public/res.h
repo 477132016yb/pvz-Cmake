@@ -33,6 +33,9 @@ public:
     std::vector<IMAGE>imgs_selectCard,imgs_gameCard;
     std::vector<IMAGE>imgs_vriPlantVec;
     std::vector<Atlas>atls_plants;
+    std::vector<std::vector<Atlas>>atls_zombies;
+    Atlas atl_zombieHead;
+    Atlas atl_zombieAshes;
     Atlas atl_sunShine;
     Atlas atl_cardCoolTime;
 };

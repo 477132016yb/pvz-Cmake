@@ -6,9 +6,11 @@
 #include "PeaShooter.h"
 #include "SunFlower.h"
 #include "SunShine.h"
+#include "NormalZombie.h"
 REGISTER_CLASS(StaticObj);
 REGISTER_CLASS(PeaShooter);
 REGISTER_CLASS(SunFlower);
+REGISTER_CLASS(NormalZombie);
 extern std::vector<int> g_selectNum;
 ClassFactory* g_factory=Singleton<ClassFactory>::instance();
 ObjManager::ObjManager() {
@@ -48,12 +50,16 @@ ObjManager::ObjManager() {
     m_shovelObj->m_x=760,m_shovelObj->m_y=-10;
 
     m_plantMap = std::vector<std::vector<Object*>>(5, std::vector<Object*>(10,nullptr));
+    m_zombiePool = std::vector<std::vector<Object*>>(5);
 }
 
 void ObjManager::update(int delta) {
     creatObject(delta);
     updateMemory();
     for(auto&a:m_plantMap){
+        yb::updateVector(a,delta);
+    }
+    for(auto&a:m_zombiePool){
         yb::updateVector(a,delta);
     }
     yb::updateVector(m_sunShinePool,delta);
@@ -86,6 +92,9 @@ void ObjManager::draw() {
         m_cardCoolAtion[i]->draw(x,y);
     }
     for(auto&a:m_plantMap){
+        yb::drawVector(a);
+    }
+    for(auto&a:m_zombiePool){
         yb::drawVector(a);
     }
     if(m_cur){
@@ -149,10 +158,14 @@ void ObjManager::checkSunShine(const ExMessage &msg) {
 void ObjManager::updateMemory() {
     yb::clearVector(m_sunShinePool);
     yb::clearVector(m_bulletPool);
+    for(auto&a:m_zombiePool){
+        yb::clearVector(a);
+    }
 }
 
 void ObjManager::creatObject(int delta) {
     creatSunShine(delta);
+    creatZombie(delta);
 }
 
 void ObjManager::creatSunShine(int delta) {
@@ -219,5 +232,16 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
 
 std::vector<Object *> &ObjManager::getBulletVec() {
     return m_bulletPool;
+}
+
+void ObjManager::creatZombie(int delta) {
+    static int count = 0;
+    count += delta;
+    static int fre = 10;
+    if (count <=fre) {return;}
+    count = 0;
+    fre = SunShine::s_creatTime + rand() % 2000;
+    auto a = dynamic_cast<Zombie*>(g_factory->create_class(yb::zombieNameList[0]));
+    m_zombiePool[a->m_row].push_back(a);
 }
 

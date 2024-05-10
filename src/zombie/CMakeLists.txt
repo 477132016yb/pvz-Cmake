@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.27)
 project(zombie)
 include_directories(${HEAD_ZOMBIE_PATH})
+include_directories(${HEAD_PATH})
 aux_source_directory(./private SRC)
 add_library(zombie STATIC ${SRC})

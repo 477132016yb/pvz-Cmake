@@ -27,11 +27,13 @@ private:
     void updateMemory();
     void creatObject(int delta);
     void creatSunShine(int delta);//创建阳光
+    void creatZombie(int delta);//创建僵尸
 private:
     int m_sun;
     Object*m_cur;
     StaticObj *m_shovelObj;
     std::vector<std::vector<Object*>>m_plantMap;
+    std::vector<std::vector<Object*>>m_zombiePool;
     std::vector<Object*>m_sunShinePool;
     std::vector<Object*>m_bulletPool;
 

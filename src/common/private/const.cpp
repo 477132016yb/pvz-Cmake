@@ -11,4 +11,7 @@ namespace yb{
     std::vector<const char*>plantNameList={
     "PeaShooter","SunFlower"
     };
+    std::vector<const char*>zombieNameList={
+            "NormalZombie","RoadBlockZombie"
+    };
 }

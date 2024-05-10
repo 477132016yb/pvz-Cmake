@@ -6,6 +6,9 @@
 std::vector<const char*>buttonName{
         "idle","hovered","pushed"
 };
+std::vector<const char*>zombieStatusName{
+        "Stand","Walking","Attack","FallDown"
+};
 void res::init() {
     loadimage(&img_bg,"res/map/bg.jpg");
     loadimage(&img_menu,"res/map/menu.png");
@@ -59,6 +62,17 @@ void res::init() {
     }
     atl_sunShine.loadFromFile("res/sunshine",getFileNum("res/sunshine"));
     atl_cardCoolTime.loadFromFile2("res/imgs/cardCoolTime",getFileNum("res/imgs/cardCoolTime"));
+
+    for(int i=0;i<atls_zombies.size();i++){
+        for(int j=0;j<atls_zombies[i].size();j++){
+            TCHAR path[64];
+            sprintf_s(path,"res/zombie/%s/%s",yb::zombieNameList[i],zombieStatusName[j]);
+            int num = getFileNum(path);
+            atls_zombies[i][j].loadFromFile(path,num);
+        }
+    }
+    atl_zombieAshes.loadFromFile("res/zombie/Ashes", getFileNum("res/zombie/Ashes"));
+    atl_zombieHead.loadFromFile("res/zombie/Head", getFileNum("res/zombie/Head"));
 }
 
 bool res::checkfile(const char *name) {
@@ -69,6 +83,7 @@ bool res::checkfile(const char *name) {
 
 res::res() {
     atls_plants.resize(PLANT_COUNT);
+    atls_zombies=std::vector<std::vector<Atlas>>(ZOMBIE_COUNT,std::vector<Atlas>(zombieStatusName.size()));
     imgs_startButton.resize(3);
     imgs_fightButton.resize(3);
     imgs_selectCard.resize(getFileNum("res/Cards/"));
