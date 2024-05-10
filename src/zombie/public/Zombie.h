@@ -28,12 +28,15 @@ public:
 public:
     void update(int delta) override;
     void draw() override;
-    bool collide(Object*obj) override;
+    void collide(Object*obj) override;
+    void setStatus(ZombieStatus status);
 public:
-    int m_row{},m_col{};
+    int m_col{};
+    static int s_creatTime;
 protected:
     int m_speed;
     int m_timer;
+    int m_damage;
     ZombieStatus m_status;
     Animation::SP m_action;
     std::vector<Atlas::SP> m_atls;

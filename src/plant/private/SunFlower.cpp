@@ -24,6 +24,6 @@ void SunFlower::skills(int delta) {
     if(m_skillTime<m_sunSpeed){return;}
     m_skillTime = 0;
     SunShine*a = SunShine::creatSunShine(m_x,m_y);
-    std::vector<Object*>&vec = Singleton<ObjManager>::instanceSP()->getSunShineVec();
+    auto&vec = Singleton<ObjManager>::instanceSP()->getSunShineVec();
     vec.push_back(a);
 }

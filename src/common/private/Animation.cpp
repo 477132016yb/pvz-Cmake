@@ -44,9 +44,9 @@ void Animation::update(int delta) {
         m_idx++;
         if(m_idx>=m_atlas->getSize()){
             m_idx=m_isLoop?0:m_atlas->getSize()-1;
-        }
-        if(!m_isLoop&&m_callback){
-            m_callback();
+            if(!m_isLoop&&m_callback){
+                m_callback();
+            }
         }
     }
 }

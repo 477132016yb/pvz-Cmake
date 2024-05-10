@@ -17,6 +17,7 @@ public:
     ~ObjManager();
     std::vector<Object*>& getSunShineVec();
     std::vector<Object*>& getBulletVec();
+    std::vector<Object*>& getZombies(int row);
 public:
     void update(int delta);
     void draw();
@@ -25,9 +26,13 @@ private:
     void processLeftButton(const ExMessage& msg);
     void checkSunShine(const ExMessage& msg);
     void updateMemory();
+private:
     void creatObject(int delta);
     void creatSunShine(int delta);//创建阳光
     void creatZombie(int delta);//创建僵尸
+private:
+    void processCollide();//碰撞处理
+    void collideVec(std::vector<Object*>&v1,std::vector<Object*>&v2);
 private:
     int m_sun;
     Object*m_cur;

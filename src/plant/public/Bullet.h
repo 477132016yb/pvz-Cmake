@@ -20,11 +20,10 @@ public:
 public:
     void update(int delta) override;
     void draw() override;
-    bool collide(Object*obj) override;
+    void collide(Object*obj) override;
     void setImage(IMAGE*img,std::vector<IMAGE>&vec);
 public:
     int m_speed;
-    int m_row;
     int m_damage;
     BulletType m_type;
 protected:

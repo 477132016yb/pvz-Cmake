@@ -4,8 +4,12 @@
 
 #include "Bullet.h"
 
-bool Bullet::collide(Object *obj) {
-    return yb::checkHit(m_x,m_y,obj->m_x+80,obj->m_y,30,100);
+void Bullet::collide(Object *obj) {
+    if (m_type==BulletType::Blast){return;}
+    if(yb::checkHitX(m_x,obj->m_x+80,30)){
+        obj->m_blood-=m_damage;
+        m_type=BulletType::Blast;
+    }
 }
 
 void Bullet::draw() {

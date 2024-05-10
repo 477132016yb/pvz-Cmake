@@ -20,6 +20,7 @@ namespace yb {
     extern std::vector<const char*>zombieNameList;
 
     bool checkHit(int x,int y,int objX,int objy,int objW,int objH);
+    bool checkHitX(int x,int objX,int objW);
 
     template<typename T>
     void clearVector(std::vector<T*>&vec){

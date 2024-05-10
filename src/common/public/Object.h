@@ -18,8 +18,9 @@ public:
 public:
     virtual void draw(){};
     virtual void update(int delta){};
-    virtual bool collide(Object*obj){return false;};
+    virtual void collide(Object*obj){};
 public:
+    int m_row;
     int m_x{},m_y{};
     int m_blood=100;
     bool m_used=true;

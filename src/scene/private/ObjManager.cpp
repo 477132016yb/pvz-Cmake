@@ -55,7 +55,6 @@ ObjManager::ObjManager() {
 
 void ObjManager::update(int delta) {
     creatObject(delta);
-    updateMemory();
     for(auto&a:m_plantMap){
         yb::updateVector(a,delta);
     }
@@ -65,6 +64,8 @@ void ObjManager::update(int delta) {
     yb::updateVector(m_sunShinePool,delta);
     yb::updateVector(m_bulletPool,delta);
     for(auto&a:m_cardCoolAtion){a->update(delta);}
+    processCollide();
+    updateMemory();
 }
 
 void ObjManager::draw() {
@@ -166,6 +167,14 @@ void ObjManager::updateMemory() {
 void ObjManager::creatObject(int delta) {
     creatSunShine(delta);
     creatZombie(delta);
+    for(auto&a:m_plantMap){
+        for(auto&b:a){
+            if(b&&!b->m_used){
+                delete b;
+                b = nullptr;
+            }
+        }
+    }
 }
 
 void ObjManager::creatSunShine(int delta) {
@@ -209,9 +218,8 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
             if (m_cur&&(!m_plantMap[row][col])&&idx!=-1) {//Ö²ÎïÖÖÏÂ
                 m_cur->m_y = 77 + row * 102;
                 m_cur->m_x = 144 + col * 81;
-                auto a= dynamic_cast<plant*>(m_cur);
-                a->m_row=row,a->m_col=col;
-                m_plantMap[row][col] = a;
+                m_cur->m_row=row;
+                m_plantMap[row][col] = m_cur;
                 m_sun-=yb::plantCostList[idx];
                 m_cardCoolAtion[idx]->reset();
                 m_cur= nullptr;
@@ -240,8 +248,36 @@ void ObjManager::creatZombie(int delta) {
     static int fre = 10;
     if (count <=fre) {return;}
     count = 0;
-    fre = SunShine::s_creatTime + rand() % 2000;
-    auto a = dynamic_cast<Zombie*>(g_factory->create_class(yb::zombieNameList[0]));
+    fre = Zombie::s_creatTime + rand() % 5000;
+    auto a = g_factory->create_class(yb::zombieNameList[0]);
     m_zombiePool[a->m_row].push_back(a);
+}
+
+std::vector<Object *> &ObjManager::getZombies(int row) {
+    return m_zombiePool[row];
+}
+
+void ObjManager::processCollide() {
+    for(auto&a:m_bulletPool){
+        int row=a->m_row;
+        std::vector<Object*>&vec=m_zombiePool[row];
+        if(vec.empty()){ continue;}
+        for(auto&b:vec){
+            a->collide(b);
+        }
+    }
+    for(int i=0;i<5;i++){
+        auto&a=m_zombiePool[i];
+        auto&b=m_plantMap[i];
+        collideVec(a,b);
+    }
+}
+
+void ObjManager::collideVec(std::vector<Object *> &v1, std::vector<Object *> &v2) {
+    for(auto&a:v1){
+        for(auto&b:v2){
+            a->collide(b);
+        }
+    }
 }
 

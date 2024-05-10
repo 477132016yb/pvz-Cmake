@@ -24,8 +24,6 @@ public:
     virtual void skills(int delta){};
 public:
     virtual plantType getType()=0;
-public:
-    int m_row{},m_col{};
 protected:
     Animation::SP m_action;
     int m_skillTime;

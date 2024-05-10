@@ -9,6 +9,7 @@ void plant::draw() {
 }
 
 void plant::update(int delta) {
+    if(m_blood<=0){m_used=false;}
     m_action->update(delta);
     skills(delta);
 }
