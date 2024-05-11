@@ -22,6 +22,7 @@ public:
     void update(int delta);
     void draw();
     void input(const ExMessage& msg);
+    void init();
 private:
     void processLeftButton(const ExMessage& msg);
     void checkSunShine(const ExMessage& msg);

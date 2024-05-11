@@ -6,12 +6,14 @@
 #include "PeaShooter.h"
 #include "SunFlower.h"
 #include "SnowPea.h"
+#include "NutWall.h"
 #include "SunShine.h"
 #include "NormalZombie.h"
 REGISTER_CLASS(StaticObj);
 REGISTER_CLASS(PeaShooter);
 REGISTER_CLASS(SunFlower);
 REGISTER_CLASS(SnowPea);
+REGISTER_CLASS(NutWall);
 REGISTER_CLASS(NormalZombie);
 extern std::vector<int> g_selectNum;
 ClassFactory* g_factory=Singleton<ClassFactory>::instance();
@@ -19,6 +21,9 @@ ObjManager::ObjManager() {
     m_sun= 1500;
     m_cur= nullptr;
     m_isMove=false;
+}
+
+void ObjManager::init() {
     srand(time(nullptr));
     res::SP r=Singleton<res>::instanceSP();
     int n=r->imgs_gameCard.size();
@@ -36,7 +41,6 @@ ObjManager::ObjManager() {
     m_cardBar=&r->img_gameBar;
     m_cardMask=&r->img_gameCardMask;
     m_shovelSlot=&r->img_shovelSlot;
-
     m_cardCoolAtion.resize(g_selectNum.size());
     Atlas::SP atlas=std::make_shared<Atlas>(r->atl_cardCoolTime);
     for(int i=0;i<m_cardCoolAtion.size();i++){

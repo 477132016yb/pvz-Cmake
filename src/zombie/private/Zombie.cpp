@@ -41,8 +41,8 @@ void Zombie::update(int delta) {
     if(m_action->getCool()){
         t_cool.update(delta);
     }
-
-    if(m_timer<120){return;}
+    int t=m_action->getCool()?240:120;
+    if(m_timer<t){return;}
     m_timer=0;
     m_col = ((m_x - 144) / 81) + 1;
     if(m_blood<0&&m_blood>-30&&m_status!=ZombieStatus::FallDown){
@@ -56,7 +56,7 @@ void Zombie::update(int delta) {
         case ZombieStatus::Stand:
             break;
         case ZombieStatus::Walking:
-            m_x-=m_action->getCool()?m_speed:m_speed/2;
+            m_x-=m_speed;
             if(m_x<0){
                 m_used=false;
             }

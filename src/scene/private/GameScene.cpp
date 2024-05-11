@@ -9,6 +9,7 @@ void GameScene::on_draw() {
 
 void GameScene::on_enter() {
     LOG("进入游戏内场景");
+    m_objManager->init();
 }
 
 void GameScene::on_update(int delta) {

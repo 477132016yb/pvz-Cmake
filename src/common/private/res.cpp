@@ -23,9 +23,9 @@ void res::init() {
     for (int i = 0; i < imgs_BlastNormal.size(); i++) {
         float k = (i + 1) * 0.2;
         loadimage(&imgs_BlastNormal[i], "res/imgs/bullets/bullet_blast.png",
-                  img_bulletNormal.getwidth() * k, img_bulletNormal.getheight() * k, true);
+                  imgs_BlastNormal[i].getwidth() * k, imgs_BlastNormal[i].getheight() * k, true);
         loadimage(&imgs_BlastCool[i], "res/imgs/bullets/bullet_blast_bing.png",
-                  img_bulletCool.getwidth() * k, img_bulletCool.getheight() * k, true);
+                  imgs_BlastCool[i].getwidth() * k, imgs_BlastCool[i].getheight() * k, true);
     }
 
 
@@ -60,6 +60,8 @@ void res::init() {
         int num= getFileNum(path);
         atls_plants[i].loadFromFile(path,num);
     }
+    atl_NutInjured.loadFromFile("res/plant/NutWall/Injured", getFileNum("res/plant/NutWall/Injured"));
+    atl_NutNearDeath.loadFromFile("res/plant/NutWall/NearDeath", getFileNum("res/plant/NutWall/NearDeath"));
     atl_sunShine.loadFromFile("res/sunshine",getFileNum("res/sunshine"));
     atl_cardCoolTime.loadFromFile2("res/imgs/cardCoolTime",getFileNum("res/imgs/cardCoolTime"));
 

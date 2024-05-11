@@ -10,7 +10,7 @@ SnowPea::SnowPea() {
     Atlas ::SP atlas=std::make_shared<Atlas>(Singleton<res>::instanceSP()->atls_plants[int(s_type)]);
     this->m_action->setAtlas(atlas);
     this->m_action->setLoop(true);
-    this->m_action->setInterval(75);
+    this->m_action->setInterval(100);
     this->m_creatSpeed=2000;
 }
 

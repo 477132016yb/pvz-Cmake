@@ -15,6 +15,7 @@ public:
         PeaShooter,
         SunFlower,
         SnowPea,
+        NutWall,
         None
     };
 public:

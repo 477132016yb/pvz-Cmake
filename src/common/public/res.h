@@ -34,6 +34,10 @@ public:
     std::vector<IMAGE>imgs_vriPlantVec;
     std::vector<Atlas>atls_plants;
     std::vector<std::vector<Atlas>>atls_zombies;
+
+    Atlas atl_NutNearDeath;
+    Atlas atl_NutInjured;
+
     Atlas atl_zombieHead;
     Atlas atl_zombieAshes;
     Atlas atl_sunShine;
