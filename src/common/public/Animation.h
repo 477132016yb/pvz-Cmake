@@ -22,10 +22,18 @@ public:
     IMAGE*getImage();
     bool checkFinished();
 public:
+    bool getSketch();
+    void setSketch(bool flag);
+    bool getCool();
+    void setCool(bool flag);
+public:
     void update(int delta);
     void draw(int x,int y)const;
     void setCallback(std::function<void()>callback);
 private:
+    bool m_isSketch=false;
+    bool m_isCool=false;
+
     int m_timer=0;//计时器
     int m_interval=60;//帧间隔
     int m_idx=0;//帧索引

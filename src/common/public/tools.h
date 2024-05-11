@@ -3,6 +3,12 @@
 #include <graphics.h>
 //¹¤¾ßº¯Êý
 void putimagePNG(int  picture_x, int picture_y, IMAGE* picture);
+
 int getDelay();
-inline void flipImage(IMAGE*src,IMAGE*dst);
+
+void flipImage(IMAGE*src,IMAGE*dst);
+
+void SketchImage(IMAGE*src,IMAGE*dst);
+
+void CoolImage(IMAGE*src,IMAGE*dst);
 #endif

@@ -108,6 +108,42 @@ void flipImage(IMAGE *src, IMAGE *dst) {
     }
 }
 
+void SketchImage(IMAGE*src,IMAGE*dst){
+    int w = src->getwidth();
+    int h = src->getheight();
+    Resize(dst,w,h);
+    DWORD* srcBuffer = GetImageBuffer(src);
+    DWORD* dstBuffer = GetImageBuffer(dst);
+    for(int y = 0;y < h;y++){
+        for(int x=0;x<w;x++){
+            int idx = y*w+x;
+            if((srcBuffer[idx]&0xFF000000)>>24){
+                dstBuffer[idx]= BGR(RGB(255,255,255)|((DWORD)(BYTE)(255))<<24);
+            }
+        }
+    }
+}
+
+void CoolImage(IMAGE*src,IMAGE*dst){
+    int w = src->getwidth();
+    int h = src->getheight();
+    Resize(dst,w,h);
+    DWORD* srcBuffer = GetImageBuffer(src);
+    DWORD* dstBuffer = GetImageBuffer(dst);
+    for(int y = 0;y < h;y++){
+        for(int x=0;x<w;x++){
+            int idx = y*w+x;
+            static const float coefficient=0.55f;//5 50 255  RGB
+            BYTE r=(BYTE)(GetBValue(srcBuffer[idx]))*coefficient+5*(1-coefficient);
+            BYTE g=(BYTE)(GetGValue(srcBuffer[idx]))*coefficient+50*(1-coefficient);
+            BYTE b=(BYTE)(GetRValue(srcBuffer[idx]))*coefficient+255*(1-coefficient);
+            if((srcBuffer[idx]&0xFF000000)>>24){
+                dstBuffer[idx]= BGR(RGB(r,g,b)|((DWORD)(BYTE)(255))<<24);
+            }
+        }
+    }
+}
+
 
 
 

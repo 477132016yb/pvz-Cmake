@@ -8,6 +8,12 @@ void Bullet::collide(Object *obj) {
     if (m_type==BulletType::Blast){return;}
     if(yb::checkHitX(m_x,obj->m_x+80,30)){
         obj->m_blood-=m_damage;
+        if(m_type==BulletType::Cool){
+            obj->setEffect(1);
+        }
+        else{
+            obj->setEffect(0);
+        }
         m_type=BulletType::Blast;
     }
 }

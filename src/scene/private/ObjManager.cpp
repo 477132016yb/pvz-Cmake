@@ -5,16 +5,18 @@
 #include "ObjManager.h"
 #include "PeaShooter.h"
 #include "SunFlower.h"
+#include "SnowPea.h"
 #include "SunShine.h"
 #include "NormalZombie.h"
 REGISTER_CLASS(StaticObj);
 REGISTER_CLASS(PeaShooter);
 REGISTER_CLASS(SunFlower);
+REGISTER_CLASS(SnowPea);
 REGISTER_CLASS(NormalZombie);
 extern std::vector<int> g_selectNum;
 ClassFactory* g_factory=Singleton<ClassFactory>::instance();
 ObjManager::ObjManager() {
-    m_sun= 50;
+    m_sun= 1500;
     m_cur= nullptr;
     m_isMove=false;
     srand(time(nullptr));
@@ -162,11 +164,6 @@ void ObjManager::updateMemory() {
     for(auto&a:m_zombiePool){
         yb::clearVector(a);
     }
-}
-
-void ObjManager::creatObject(int delta) {
-    creatSunShine(delta);
-    creatZombie(delta);
     for(auto&a:m_plantMap){
         for(auto&b:a){
             if(b&&!b->m_used){
@@ -175,6 +172,11 @@ void ObjManager::creatObject(int delta) {
             }
         }
     }
+}
+
+void ObjManager::creatObject(int delta) {
+    creatSunShine(delta);
+    creatZombie(delta);
 }
 
 void ObjManager::creatSunShine(int delta) {
@@ -226,8 +228,7 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
                 idx=-1;
             }
             else if(m_cur&&m_plantMap[row][col]&&m_cur->getName()=="StaticObj"){//²ù×Ó°´ÏÂ
-                delete m_plantMap[row][col];
-                m_plantMap[row][col]= nullptr;
+                m_plantMap[row][col]->m_used=false;
                 m_cur = nullptr;
                 m_shovelObj->m_x=760,m_shovelObj->m_y=-10;
             }

@@ -19,6 +19,7 @@ public:
     virtual void draw(){};
     virtual void update(int delta){};
     virtual void collide(Object*obj){};
+    virtual void setEffect(int type){};
 public:
     int m_row;
     int m_x{},m_y{};

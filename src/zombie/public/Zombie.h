@@ -29,11 +29,14 @@ public:
     void update(int delta) override;
     void draw() override;
     void collide(Object*obj) override;
+    void setEffect(int type) override;
+public:
     void setStatus(ZombieStatus status);
 public:
     int m_col{};
     static int s_creatTime;
 protected:
+    Timer t_sketch,t_cool;
     int m_speed;
     int m_timer;
     int m_damage;

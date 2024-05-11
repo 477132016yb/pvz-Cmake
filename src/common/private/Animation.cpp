@@ -4,6 +4,8 @@
 
 #include "Animation.h"
 
+#include <utility>
+
 void Animation::reset() {
     m_timer=0;
     m_idx=0;
@@ -52,10 +54,36 @@ void Animation::update(int delta) {
 }
 
 void Animation::draw(int x, int y) const {
-    putimagePNG(x,y,m_atlas->getImage(m_idx));
+    IMAGE*img=m_atlas->getImage(m_idx);
+    IMAGE specialEffect;
+    if(m_isCool){
+        CoolImage(img,&specialEffect);
+        img=&specialEffect;
+    }
+    else if(m_isSketch&&m_idx%2){
+        SketchImage(img,&specialEffect);
+        img=&specialEffect;
+    }
+    putimagePNG(x,y,img);
 }
 
 void Animation::setCallback(std::function<void()>callback) {
-    m_callback=callback;
+    m_callback=std::move(callback);
+}
+
+void Animation::setSketch(bool flag) {
+    m_isSketch=flag;
+}
+
+bool Animation::getSketch() {
+    return m_isSketch;
+}
+
+void Animation::setCool(bool flag) {
+    m_isCool=flag;
+}
+
+bool Animation::getCool() {
+    return m_isCool;
 }
 

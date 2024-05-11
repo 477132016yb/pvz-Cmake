@@ -14,6 +14,7 @@ public:
     enum class plantType{
         PeaShooter,
         SunFlower,
+        SnowPea,
         None
     };
 public:
