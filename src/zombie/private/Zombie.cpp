@@ -6,7 +6,8 @@
 int Zombie::s_creatTime=8000;
 Zombie::Zombie() {
     m_action = std::make_shared<Animation>();
-    m_atls.resize(4);
+    m_headAction = std::make_shared<Animation>();
+    m_atls.resize(5);
     m_speed=2;
     m_timer=0;
     m_x = 850+ rand() % 100;
@@ -25,10 +26,23 @@ Zombie::Zombie() {
     });
     t_cool.setOneTrigger(false);
     t_cool.setWaitTime(3000);
+
+    //…Ë÷√µÙÕ∑∂Øª≠
+    auto r=Singleton<res>::instanceSP();
+    auto atlas=std::make_shared<Atlas>(r->atl_zombieHead);
+    m_headAction->setAtlas(atlas);
+    m_headAction->setLoop(false);
+    m_headAction->setInterval(10);
+    m_headAction->setCallback([this](){
+        m_used=false;
+    });
 }
 
 void Zombie::draw() {
     m_action->draw(m_x,m_y);
+    if(m_status==ZombieStatus::FallDown){
+        m_headAction->draw(m_x+15,m_y+5);
+    }
 }
 
 void Zombie::update(int delta) {
@@ -49,6 +63,14 @@ void Zombie::update(int delta) {
         setStatus(ZombieStatus::FallDown);
         m_action->setLoop(false);
         m_action->setCallback([this](){
+            m_isCollide=false;
+        });
+    }
+    else if(m_blood<-1000&&m_status!=ZombieStatus::Ashes){
+        m_isCollide=false;
+        setStatus(ZombieStatus::Ashes);
+        m_action->setLoop(false);
+        m_action->setCallback([this](){
             m_used=false;
         });
     }
@@ -64,6 +86,7 @@ void Zombie::update(int delta) {
         case ZombieStatus::Attack:
             break;
         case ZombieStatus::FallDown:
+            m_headAction->update(delta);
             break;
         case ZombieStatus::Ashes:
             break;

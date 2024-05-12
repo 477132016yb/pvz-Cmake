@@ -3,18 +3,9 @@
 //
 
 #include "ObjManager.h"
-#include "PeaShooter.h"
-#include "SunFlower.h"
-#include "SnowPea.h"
-#include "NutWall.h"
 #include "SunShine.h"
-#include "NormalZombie.h"
-REGISTER_CLASS(StaticObj);
-REGISTER_CLASS(PeaShooter);
-REGISTER_CLASS(SunFlower);
-REGISTER_CLASS(SnowPea);
-REGISTER_CLASS(NutWall);
-REGISTER_CLASS(NormalZombie);
+#include "ZombieHeadFile.h"
+#include "PlantHeadFile.h"
 extern std::vector<int> g_selectNum;
 ClassFactory* g_factory=Singleton<ClassFactory>::instance();
 ObjManager::ObjManager() {
@@ -138,9 +129,14 @@ void ObjManager::input(const ExMessage &msg) {
             break;
         case WM_RBUTTONDOWN:
             if(m_cur){
+                if(m_cur->getName()=="StaticObj"){
+                    m_shovelObj->m_x=760,m_shovelObj->m_y=-10;
+                }
+                else{
+                    delete m_cur;
+                }
                 m_cur = nullptr;
-                m_virtualPlant= nullptr;
-                m_shovelObj->m_x=760,m_shovelObj->m_y=-10;
+                m_virtualPlant->m_isDraw=false;
             }
             break;
         case WM_LBUTTONUP:
@@ -211,9 +207,11 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
         if(m_sun<yb::plantCostList[g_selectNum[idx]]||!m_cardCoolAtion[idx]->checkFinished()){ return;}
         m_cur = g_factory->create_class(yb::plantNameList[g_selectNum[idx]]);
         m_virtualPlant->setImage(m_vriPlantVec[g_selectNum[idx]]);
+        m_virtualPlant->m_isDraw=true;
     }
     else if (msg.x>750&&msg.x<750+70&&msg.y<70&&msg.y>10) {
         m_cur=m_shovelObj;
+        idx=-1;
     }
     else if(m_cur){
         int x = msg.x;

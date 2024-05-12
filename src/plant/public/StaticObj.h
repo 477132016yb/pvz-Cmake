@@ -15,6 +15,8 @@ public:
 public:
     void draw() override;
     void update(int delta) override;
+public:
+    bool m_isDraw=true;
 private:
     IMAGE*m_img;
 };

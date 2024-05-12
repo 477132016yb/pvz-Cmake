@@ -5,7 +5,9 @@
 #include "../public/StaticObj.h"
 
 void StaticObj::draw() {
-    putimagePNG(m_x,m_y,m_img);
+    if(m_isDraw){
+        putimagePNG(m_x,m_y,m_img);
+    }
 }
 
 void StaticObj::update(int delta) {

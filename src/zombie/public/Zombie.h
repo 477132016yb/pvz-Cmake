@@ -5,7 +5,7 @@
 #ifndef PVZ_ZOMBIE_H
 #define PVZ_ZOMBIE_H
 
-#include "Object.h"
+#include "ClassFactory.h"
 #include "Animation.h"
 #include "res.h"
 class Zombie :public Object{
@@ -42,6 +42,8 @@ protected:
     int m_damage;
     ZombieStatus m_status;
     Animation::SP m_action;
+    Animation::SP m_headAction;
+
     std::vector<Atlas::SP> m_atls;
 };
 

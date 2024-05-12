@@ -5,7 +5,7 @@
 #include "Bullet.h"
 
 void Bullet::collide(Object *obj) {
-    if (m_type==BulletType::Blast){return;}
+    if (m_type==BulletType::Blast||!obj->m_isCollide){return;}
     if(yb::checkHitX(m_x,obj->m_x+80,30)){
         obj->m_blood-=m_damage;
         if(m_type==BulletType::Cool){

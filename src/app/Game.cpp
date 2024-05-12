@@ -10,7 +10,7 @@ void Game::play() {
     init();
     ExMessage msg;
     BeginBatchDraw();
-    m_sceneManager->setCurrentState(g_menuSence);
+    m_sceneManager->setCurrentState(g_gameSence);
     while (true) {
         DWORD frame_start_time=GetTickCount();
         while(peekmessage(&msg)){

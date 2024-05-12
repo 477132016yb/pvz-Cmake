@@ -25,6 +25,7 @@ public:
     int m_x{},m_y{};
     int m_blood=100;
     bool m_used=true;
+    bool m_isCollide=true;
     static const vector2& m_CameraPos;
 public:
     std::string className;
