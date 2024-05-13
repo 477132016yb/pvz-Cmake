@@ -4,6 +4,8 @@
 //¹¤¾ßº¯Êý
 void putimagePNG(int  picture_x, int picture_y, IMAGE* picture);
 
+void _putimagePNG(int  picture_x, int picture_y, IMAGE* picture);
+
 int getDelay();
 
 void flipImage(IMAGE*src,IMAGE*dst);

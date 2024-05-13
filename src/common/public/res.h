@@ -24,6 +24,7 @@ public:
     IMAGE img_selectCardMask,img_gameCardMask;
     IMAGE img_shovel,img_shovelSlot;
     IMAGE img_bulletNormal,img_bulletCool,img_bulletFire;
+    IMAGE img_PotatoMineUnderGround,img_PotatoMineBoom;
     std::vector<IMAGE>imgs_BlastNormal,imgs_BlastCool;
 
 

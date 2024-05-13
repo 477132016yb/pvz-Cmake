@@ -6,7 +6,7 @@
 #define PVZ_MENUSCENE_H
 #include "Scene.h"
 #include "SceneManager.h"
-class MenuScene :public Scene{
+class MenuScene :public Scene{//²Ëµ¥³¡¾°
 public:
     MenuScene();
     ~MenuScene()=default;

@@ -7,7 +7,7 @@
 #include "Object.h"
 #include "tools.h"
 
-class StaticObj :public Object{
+class StaticObj :public Object{//æ≤Ã¨∂‘œÛ
 public:
     StaticObj() = default;
     ~StaticObj() override = default;

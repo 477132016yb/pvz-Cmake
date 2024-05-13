@@ -8,16 +8,16 @@
 #include "ClassFactory.h"
 #include "Animation.h"
 #include "res.h"
-class Zombie :public Object{
+class Zombie :public Object{//僵尸基类
 public:
     Zombie();
     ~Zombie() override = default;
 public:
-    enum class ZombieType{
+    enum class ZombieType{//僵尸类型
         NormalZombie,
         RoadBlockZombie
     };
-    enum class ZombieStatus{
+    enum class ZombieStatus{//僵尸状态
         Stand,
         Walking,
         Attack,
@@ -31,20 +31,20 @@ public:
     void collide(Object*obj) override;
     void setEffect(int type) override;
 public:
-    void setStatus(ZombieStatus status);
+    void setStatus(ZombieStatus status);//设置状态
 public:
-    int m_col{};
-    static int s_creatTime;
+    int m_col{};//列信息
+    static int s_creatTime;//僵尸创建冷却时间
 protected:
-    Timer t_sketch,t_cool;
-    int m_speed;
-    int m_timer;
-    int m_damage;
-    ZombieStatus m_status;
-    Animation::SP m_action;
-    Animation::SP m_headAction;
+    Timer t_sketch,t_cool;//冰冻效果和打击效果定时器
+    int m_speed;//移动速度
+    int m_timer;//控制僵尸整体刷新帧率
+    int m_damage;//伤害
+    ZombieStatus m_status;//状态
+    Animation::SP m_action;//动画
+    Animation::SP m_headAction;//掉头动画
 
-    std::vector<Atlas::SP> m_atls;
+    std::vector<Atlas::SP> m_atls;//动画所需图集数组
 };
 
 

@@ -4,7 +4,7 @@
 
 #include "SceneManager.h"
 //std::vector<int> g_selectNum=std::vector<int>(8,-1);
-std::vector<int> g_selectNum=std::vector<int>{0,1,2,3,4};
+std::vector<int> g_selectNum=std::vector<int>{0,1,2,3,4,5};
 void SceneManager::setCurrentState(Scene *scene) {
     m_scene=scene;
     m_scene->on_enter();

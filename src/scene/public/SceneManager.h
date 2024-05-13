@@ -8,7 +8,7 @@
 extern Scene* g_gameSence;
 extern Scene* g_menuSence;
 extern Scene* g_selectSence;
-class SceneManager {
+class SceneManager {//场景管理者
 public:
     enum class SceneType{
         Menu,

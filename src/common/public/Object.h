@@ -13,22 +13,23 @@ public:
     Object()=default;
     virtual ~Object()=default;
 public:
-    void SetName(const std::string& cName);
-    std::string getName();
+    void SetName(const std::string& cName);//设置类名
+    std::string getName();//获取类名
 public:
-    virtual void draw(){};
-    virtual void update(int delta){};
-    virtual void collide(Object*obj){};
-    virtual void setEffect(int type){};
+    virtual void draw(){};//绘图
+    virtual void update(int delta){};//更新
+    virtual void collide(Object*obj){};//碰撞
+    virtual void setEffect(int type){};//设置特效
 public:
-    int m_row;
-    int m_x{},m_y{};
-    int m_blood=100;
-    bool m_used=true;
-    bool m_isCollide=true;
-    static const vector2& m_CameraPos;
+    int m_row;//目标所在行
+    int m_x{},m_y{};//坐标
+    int m_dx=0,m_dy=0;//坐标偏移量
+    int m_blood=100;//血量
+    bool m_used=true;//是否能被回收内存
+    bool m_isCollide=true;//是否能被碰撞检测
+    static const vector2& m_CameraPos;//摄像机位置，暂时未过多使用
 public:
-    std::string className;
+    std::string className;//类名
 };
 
 #endif //PVZ_OBJECT_H

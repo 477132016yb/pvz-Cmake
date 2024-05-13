@@ -220,8 +220,8 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
             int row = (y - 77) / 102;
             int col = (x - 144) / 81;
             if (m_cur&&(!m_plantMap[row][col])&&idx!=-1) {//Ö²ÎïÖÖÏÂ
-                m_cur->m_y = 77 + row * 102;
-                m_cur->m_x = 144 + col * 81;
+                m_cur->m_y = 77 + row * 102+m_cur->m_dy;
+                m_cur->m_x = 144 + col * 81+m_cur->m_dx;;
                 m_cur->m_row=row;
                 m_plantMap[row][col] = m_cur;
                 m_sun-=yb::plantCostList[idx];
@@ -273,12 +273,15 @@ void ObjManager::processCollide() {
         auto&a=m_zombiePool[i];
         auto&b=m_plantMap[i];
         collideVec(a,b);
+        collideVec(b,a);
     }
 }
 
 void ObjManager::collideVec(std::vector<Object *> &v1, std::vector<Object *> &v2) {
     for(auto&a:v1){
+        if(!a){continue;}
         for(auto&b:v2){
+            if(!b){continue;}
             a->collide(b);
         }
     }

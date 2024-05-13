@@ -11,7 +11,7 @@ Zombie::Zombie() {
     m_speed=2;
     m_timer=0;
     m_x = 850+ rand() % 100;
-    m_row = rand() % 5;
+    m_row = 3+rand() % 2;
     m_y = 30 + 100 * m_row;
     m_damage=20;
 
@@ -96,8 +96,8 @@ void Zombie::update(int delta) {
 }
 
 void Zombie::collide(Object *obj) {
-    if(!obj){return;}
     static int count=0;
+    if(!obj->m_isCollide){return;}
     if(m_status!=ZombieStatus::Attack&&m_status!=ZombieStatus::Walking){return;}
     if(yb::checkHitX(m_x,obj->m_x-50,30)){
         if(m_status==ZombieStatus::Walking){

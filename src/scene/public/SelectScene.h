@@ -9,7 +9,7 @@
 #include "Camera.h"
 #include "SceneManager.h"
 
-class SelectScene :public Scene{
+class SelectScene :public Scene{//Ñ¡¿¨³¡¾°
 public:
     SelectScene();
     ~SelectScene()=default;

@@ -6,7 +6,7 @@
 #define PVZ_NORMALZOMBIE_H
 #include "Zombie.h"
 
-class NormalZombie :public Zombie{
+class NormalZombie :public Zombie{//∆’Õ®Ω© ¨
 public:
     NormalZombie();
     ~NormalZombie() override =default;

@@ -9,7 +9,7 @@
 #include "ObjManager.h"
 
 
-class GameScene :public Scene{
+class GameScene :public Scene{//”Œœ∑≥°æ∞
 public:
     GameScene();
     ~GameScene()=default;

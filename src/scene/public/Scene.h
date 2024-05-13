@@ -10,7 +10,7 @@
 #include "Singleton.h"
 #include "Button.h"
 #include "res.h"
-class Scene {
+class Scene {//³¡¾°»ùÀà
 public:
     Scene()=default;
     ~Scene()=default;
