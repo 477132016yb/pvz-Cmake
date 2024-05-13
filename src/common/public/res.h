@@ -38,11 +38,13 @@ public:
 
     Atlas atl_NutNearDeath;
     Atlas atl_NutInjured;
+    Atlas atl_cardCoolTime;
+    Atlas atl_ChomperAttack,atl_ChomperDigestion;
 
     Atlas atl_zombieHead;
     Atlas atl_zombieAshes;
+
     Atlas atl_sunShine;
-    Atlas atl_cardCoolTime;
 };
 
 

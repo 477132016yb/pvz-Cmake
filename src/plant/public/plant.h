@@ -17,6 +17,7 @@ public:
         SnowPea,
         NutWall,
         PotatoMine,
+        Chomper,
         None
     };
 public:

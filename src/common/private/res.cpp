@@ -64,6 +64,9 @@ void res::init() {
     }
     atl_NutInjured.loadFromFile("res/plant/NutWall/Injured", getFileNum("res/plant/NutWall/Injured"));
     atl_NutNearDeath.loadFromFile("res/plant/NutWall/NearDeath", getFileNum("res/plant/NutWall/NearDeath"));
+    atl_ChomperAttack.loadFromFile("res/plant/Chomper/Attack", getFileNum("res/plant/Chomper/Attack"));
+    atl_ChomperDigestion.loadFromFile("res/plant/Chomper/Digestion", getFileNum("res/plant/Chomper/Digestion"));
+
     atl_sunShine.loadFromFile("res/sunshine",getFileNum("res/sunshine"));
     atl_cardCoolTime.loadFromFile2("res/imgs/cardCoolTime",getFileNum("res/imgs/cardCoolTime"));
 

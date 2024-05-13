@@ -12,9 +12,9 @@ PotatoMine::PotatoMine() {
     this->m_status=PotatoMineStatus::UnderGround;
     this->m_action->setAtlas(atlas);
     this->m_action->setLoop(true);
-    this->m_action->setInterval(75);
+    this->m_action->setInterval(150);
 
-    this->m_timer.setWaitTime(1000);
+    this->m_timer.setWaitTime(15000);
     this->m_timer.setOneTrigger(true);
     this->m_timer.setCallback([this](){
         m_status=PotatoMineStatus::Normal;
