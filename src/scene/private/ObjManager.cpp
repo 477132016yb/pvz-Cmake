@@ -16,22 +16,8 @@ ObjManager::ObjManager() {
 
 void ObjManager::init() {
     srand(time(nullptr));
-    res::SP r=Singleton<res>::instanceSP();
-    int n=r->imgs_gameCard.size();
-    m_cardVault.resize(n);
-    for(int i=0;i<n;i++){
-        m_cardVault[i]=&r->imgs_gameCard[i];
-    }
+    auto r=Singleton<res>::instanceSP();
 
-    m_vriPlantVec.resize(r->imgs_vriPlantVec.size());
-    for(int i=0;i<m_vriPlantVec.size();i++){
-        m_vriPlantVec[i]=&r->imgs_vriPlantVec[i];
-    }
-
-    m_bg=&r->img_bg;
-    m_cardBar=&r->img_gameBar;
-    m_cardMask=&r->img_gameCardMask;
-    m_shovelSlot=&r->img_shovelSlot;
     m_cardCoolAtion.resize(g_selectNum.size());
     Atlas::SP atlas=std::make_shared<Atlas>(r->atl_cardCoolTime);
     for(int i=0;i<m_cardCoolAtion.size();i++){
@@ -66,9 +52,10 @@ void ObjManager::update(int delta) {
 }
 
 void ObjManager::draw() {
-    putimage(-112,0,m_bg);
-    putimage(250 - 112,0,m_cardBar);
-    putimagePNG(750,0,m_shovelSlot);
+    auto r=Singleton<res>::instanceSP();
+    putimage(-112,0,&r->img_bg);
+    putimage(250 - 112,0,&r->img_gameBar);
+    putimagePNG(750,0,&r->img_shovelSlot);
     m_shovelObj->draw();
     if(m_isMove){
         m_virtualPlant->draw();
@@ -81,11 +68,11 @@ void ObjManager::draw() {
     for(int i=0;i<g_selectNum.size();i++){
         if(g_selectNum[i]==-1){break;}
         int num=g_selectNum[i];
-        int x=339 - 112+i*(m_cardVault[num]->getwidth()+5);
+        int x=339 - 112+i*(r->imgs_gameCard[num].getwidth()+5);
         int y=8;
-        putimage(x,y,m_cardVault[num]);
+        putimage(x,y,&r->imgs_gameCard[num]);
         if(m_sun<yb::plantCostList[g_selectNum[i]]){
-            putimagePNG(x,y,m_cardMask);
+            putimagePNG(x,y,&r->img_gameCardMask);
         }
         m_cardCoolAtion[i]->draw(x,y);
     }
@@ -206,7 +193,7 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
         idx = (msg.x - (227)) / 64;
         if(m_sun<yb::plantCostList[g_selectNum[idx]]||!m_cardCoolAtion[idx]->checkFinished()){ return;}
         m_cur = g_factory->create_class(yb::plantNameList[g_selectNum[idx]]);
-        m_virtualPlant->setImage(m_vriPlantVec[g_selectNum[idx]]);
+        m_virtualPlant->setImage(&Singleton<res>::instanceSP()->imgs_vriPlantVec[g_selectNum[idx]]);
         m_virtualPlant->m_isDraw=true;
     }
     else if (msg.x>750&&msg.x<750+70&&msg.y<70&&msg.y>10) {

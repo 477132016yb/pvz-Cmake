@@ -43,14 +43,7 @@ private:
     std::vector<std::vector<Object*>>m_zombiePool;//僵尸池
     std::vector<Object*>m_sunShinePool;//阳光池
     std::vector<Object*>m_bulletPool;//子弹池
-
     std::vector<Animation::SP>m_cardCoolAtion;//卡牌冷却动画数组
-    std::vector<IMAGE*>m_cardVault;//卡牌图片数组
-    std::vector<IMAGE*>m_vriPlantVec;//虚化植物图片数组
-    IMAGE *m_bg;//背景图
-    IMAGE *m_cardBar;//卡槽图
-    IMAGE *m_cardMask;//卡牌掩码图
-    IMAGE *m_shovelSlot;//铲子背景图
     bool m_isMove;//鼠标是否在虚化图片选中时移动
 };
 

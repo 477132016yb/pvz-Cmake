@@ -16,8 +16,11 @@ public:
     void reset();
     void timerReSet();
     void update(int delta);
-    void reSetSpeed();
+    void reSetSpeed(float speed);
     bool isTrigger();
+public:
+    void setCallback(std::function<void()> callback);
+    void setWaitTime(int time);
 private:
     vector2 m_pos;
     Timer::SP m_timer;

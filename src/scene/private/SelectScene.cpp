@@ -5,27 +5,22 @@
 #include "SelectScene.h"
 extern std::vector<int> g_selectNum;
 SelectScene::SelectScene() {
-    res::SP r=Singleton<res>::instanceSP();
+    auto r=Singleton<res>::instanceSP();
     m_camera=Singleton<Camera>::instanceSP();
     m_fightButton=std::make_shared<Button>();
-    m_bg=&r->img_bg;
-    m_PanelBackGround=&r->img_PanelBackGround;
-    m_cardBar=&r->img_selectBar;
-    m_cardVault.resize(r->imgs_selectCard.size());
-    for(int i=0;i<m_cardVault.size();i++){
-        m_cardVault[i]=&r->imgs_selectCard[i];
-    }
     m_cardWidth=50;
     m_cardHeight=72;
-    m_isCardSelect.resize(m_cardVault.size());
-    m_cardMask=&r->img_selectCardMask;
+    m_isCardSelect.resize(r->imgs_selectCard.size());
 
     m_fightButton->setRect({155,545,150+150,550+40});
     m_fightButton->setImage(r->imgs_fightButton);
     m_fightButton->setCallback([this](){
-//        m_camera->reSetSpeed();
-//        m_camera->timerReSet();
-        Singleton<SceneManager>::instance()->switchTo(SceneManager::SceneType::Game);
+        m_camera->reSetSpeed(-0.2);
+        m_camera->setWaitTime(1940);   //500-112=388  388*0.2=1940
+        m_camera->timerReSet();
+        m_camera->setCallback([](){
+            Singleton<SceneManager>::instance()->switchTo(SceneManager::SceneType::Game);
+        });
     });
 }
 
@@ -39,20 +34,21 @@ void SelectScene::on_update(int delta) {
 }
 
 void SelectScene::on_draw() {
-    putimage(0-m_camera->getPosition().x,0-m_camera->getPosition().y,m_bg);
+    auto r=Singleton<res>::instanceSP();
+    putimage(0-m_camera->getPosition().x,0-m_camera->getPosition().y,&r->img_bg);
     if(m_camera->isTrigger()){
-        int objY=m_cardBar->getheight();
-        putimage(0,0,m_cardBar);
-        putimage(0,objY,m_PanelBackGround);
+        int objY=r->img_selectBar.getheight();
+        putimage(0,0,&r->img_selectBar);
+        putimage(0,objY,&r->img_PanelBackGround);
         m_fightButton->draw();
 
-        for(int i=0;i<m_cardVault.size();i++){
+        for(int i=0;i<r->imgs_selectCard.size();i++){
             int row=i/8,col=i%8;
             int x=25+col*(m_cardWidth+2);
             int y=objY+40+row*(m_cardHeight+1);
-            putimage(x,y,m_cardVault[i]);
+            putimage(x,y,&r->imgs_selectCard[i]);
             if(m_isCardSelect[i]){
-                putimagePNG(x,y,m_cardMask);
+                putimagePNG(x,y,&r->img_selectCardMask);
             }
         }
 
@@ -61,7 +57,7 @@ void SelectScene::on_draw() {
             int num=g_selectNum[i];
             int x=78+i*(m_cardWidth+5);
             int y=5;
-            putimage(x,y,m_cardVault[num]);
+            putimage(x,y,&r->imgs_selectCard[num]);
         }
     }
 }
@@ -110,6 +106,5 @@ void SelectScene::on_input(const ExMessage &msg) {
 }
 
 void SelectScene::on_exit() {
-    m_camera->reset();
     LOG("Àë¿ªÑ¡Ôñ³¡¾°");
 }

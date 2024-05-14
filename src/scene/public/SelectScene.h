@@ -24,12 +24,6 @@ private:
     Button::SP m_fightButton;
     std::vector<bool>m_isCardSelect;
     int m_cardWidth,m_cardHeight;
-
-    std::vector<IMAGE*>m_cardVault;
-    IMAGE *m_bg;
-    IMAGE *m_PanelBackGround;
-    IMAGE *m_cardBar;
-    IMAGE *m_cardMask;
 };
 
 

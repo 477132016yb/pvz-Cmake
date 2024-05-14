@@ -4,6 +4,8 @@
 
 #include "Camera.h"
 
+#include <utility>
+
 const vector2 &Camera::getPosition() const {
     return m_pos;
 }
@@ -32,10 +34,18 @@ void Camera::timerReSet() {
     m_timer->restart();
 }
 
-void Camera::reSetSpeed() {
-    m_speed=-0.2;
+void Camera::reSetSpeed(float speed) {
+    m_speed=speed;
 }
 
 bool Camera::isTrigger() {
     return m_timer->isTrigger();
+}
+
+void Camera::setCallback(std::function<void()> callback) {
+    m_timer->setCallback(std::move(callback));
+}
+
+void Camera::setWaitTime(int time) {
+    m_timer->setWaitTime(time);
 }
