@@ -20,6 +20,7 @@ public:
     virtual void update(int delta){};//更新
     virtual void collide(Object*obj){};//碰撞
     virtual void setEffect(int type){};//设置特效
+    virtual void collect(){};//收集
 public:
     int m_row;//目标所在行
     int m_x{},m_y{};//坐标

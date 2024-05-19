@@ -5,6 +5,7 @@
 #include "Chomper.h"
 plant::plantType Chomper::s_type=plantType::Chomper;
 Chomper::Chomper() {
+    this->m_temp= nullptr;
     this->m_dy-=25;
     this->m_damage=500;
     this->setStatus(ChomperStatus::Normal);
@@ -33,7 +34,15 @@ void Chomper::setStatus(Chomper::ChomperStatus status) {
             atlas=std::make_shared<Atlas>(Singleton<res>::instanceSP()->atl_ChomperAttack);
             m_action->setLoop(false);
             m_action->setCallback([this](){
-                setStatus(ChomperStatus::Digestion);
+                if(m_damage>=m_temp->m_blood){
+                    setStatus(ChomperStatus::Digestion);
+                    m_temp->m_used=false;
+                }
+                else{
+                    m_action->reset();
+                    m_temp->m_blood-=m_damage;
+                    m_temp->setEffect(0);
+                }
             });
             break;
         case ChomperStatus::Digestion:
@@ -49,12 +58,7 @@ void Chomper::collide(Object *obj) {
     if(!obj->m_isCollide){return;}
     if(yb::checkHitX(obj->m_x,m_x-50,150)&&m_status==ChomperStatus::Normal){
         setStatus(ChomperStatus::Attack);
-        if(m_damage>=obj->m_blood){
-            obj->m_used=false;
-        }
-        else{
-            obj->m_blood-=20;
-        }
+        m_temp=obj;
     }
 }
 

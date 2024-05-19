@@ -24,10 +24,9 @@ void PeaShooter::skills(int delta) {
     m_skillTime+=delta;
     if(m_skillTime<m_creatSpeed){return;}
     m_skillTime = 0;
-    auto*a = new Bullet();
+    auto*a = new Bullet(Bullet::BulletType::Normal);
     a->m_row=m_row;
     a->m_x=m_x+40,a->m_y=m_y;
-    a->setImage(&Singleton<res>::instanceSP()->img_bulletNormal,Singleton<res>::instanceSP()->imgs_BlastNormal);
     std::vector<Object*>&vec = Singleton<ObjManager>::instanceSP()->getBulletVec();
     vec.push_back(a);
 }

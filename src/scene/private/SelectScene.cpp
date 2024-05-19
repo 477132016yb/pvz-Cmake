@@ -16,7 +16,7 @@ SelectScene::SelectScene() {
     m_fightButton->setImage(r->imgs_fightButton);
     m_fightButton->setCallback([this](){
         m_camera->reSetSpeed(-0.2);
-        m_camera->setWaitTime(1940);   //500-112=388  388*0.2=1940
+        m_camera->setWaitTime(1940);   //500-112=388  388/0.2=1940
         m_camera->timerReSet();
         m_camera->setCallback([](){
             Singleton<SceneManager>::instance()->switchTo(SceneManager::SceneType::Game);

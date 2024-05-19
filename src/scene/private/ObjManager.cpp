@@ -3,9 +3,7 @@
 //
 
 #include "ObjManager.h"
-#include "SunShine.h"
-#include "ZombieHeadFile.h"
-#include "PlantHeadFile.h"
+#include "ClassFactory.h"
 extern std::vector<int> g_selectNum;
 ClassFactory* g_factory=Singleton<ClassFactory>::instance();
 ObjManager::ObjManager() {
@@ -137,9 +135,7 @@ void ObjManager::checkSunShine(const ExMessage &msg) {
     for(auto&a:m_sunShinePool){
         if(!a){ continue;}
         if(yb::checkHit(msg.x,msg.y,a->m_x+5,a->m_y+5,60,60)){
-            auto*b = dynamic_cast<SunShine*>(a);
-            if(!b){ continue;}
-            b->collect();
+            a->collect();
             m_sun+=25;
         }
     }
@@ -172,9 +168,9 @@ void ObjManager::creatSunShine(int delta) {
     static int fre = 10;
     if (count <=fre) {return;}
     count = 0;
-    fre = SunShine::s_creatTime + rand() % 2000;
+    fre = 3000 + rand() % 2000;
 
-    SunShine*a =SunShine::creatSunShine();
+    auto a =g_factory->create_class("SunShine");
     m_sunShinePool.push_back(a);
 }
 
@@ -238,7 +234,7 @@ void ObjManager::creatZombie(int delta) {
     static int fre = 10;
     if (count <=fre) {return;}
     count = 0;
-    fre = Zombie::s_creatTime + rand() % 5000;
+    fre = 8000 + rand() % 5000;
     auto a = g_factory->create_class(yb::zombieNameList[0]);
     m_zombiePool[a->m_row].push_back(a);
 }

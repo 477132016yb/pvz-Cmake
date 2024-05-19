@@ -7,8 +7,6 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "ObjManager.h"
-
-
 class GameScene :public Scene{//ÓÎÏ·³¡¾°
 public:
     GameScene();

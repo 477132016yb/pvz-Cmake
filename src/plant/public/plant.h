@@ -18,6 +18,7 @@ public:
         NutWall,
         PotatoMine,
         Chomper,
+        TorchWood,
         None
     };
 public:

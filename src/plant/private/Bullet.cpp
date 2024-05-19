@@ -14,7 +14,7 @@ void Bullet::collide(Object *obj) {
         else{
             obj->setEffect(0);
         }
-        m_type=BulletType::Blast;
+        setType(BulletType::Blast);
     }
 }
 
@@ -45,12 +45,12 @@ void Bullet::update(int delta) {
     }
 }
 
-Bullet::Bullet() {
+Bullet::Bullet(BulletType type) {
     m_idx=0;
     m_timer=0;
     m_speed=10;
     m_damage=13;
-    m_type=BulletType::Normal;
+    setType(type);
 }
 
 void Bullet::setImage(IMAGE *img, std::vector<IMAGE> &vec) {
@@ -59,4 +59,28 @@ void Bullet::setImage(IMAGE *img, std::vector<IMAGE> &vec) {
     for(int i=0;i<m_imgs.size();i++){
         m_imgs[i]=&vec[i];
     }
+}
+
+void Bullet::setType(Bullet::BulletType type) {
+    m_lastType=m_type;
+    switch (type) {
+        case BulletType::Normal:
+            setImage(&Singleton<res>::instanceSP()->img_bulletNormal,Singleton<res>::instanceSP()->imgs_BlastNormal);
+            break;
+        case BulletType::Cool:
+            setImage(&Singleton<res>::instanceSP()->img_bulletCool,Singleton<res>::instanceSP()->imgs_BlastCool);
+            if(m_lastType==BulletType::Fire){
+                m_damage/=2;
+            }
+            break;
+        case BulletType::Fire:
+            setImage(&Singleton<res>::instanceSP()->img_bulletFire,Singleton<res>::instanceSP()->imgs_BlastNormal);
+            if(m_lastType==BulletType::Normal){
+                m_damage*=2;
+            }
+            break;
+        case BulletType::Blast:
+            break;
+    }
+    m_type=type;
 }

@@ -3,6 +3,8 @@
 //
 
 #include "GameScene.h"
+#include "PlantHeadFile.h"
+#include "ZombieHeadFile.h"
 void GameScene::on_draw() {
     m_objManager->draw();
 }

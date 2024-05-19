@@ -34,7 +34,6 @@ public:
     void setStatus(ZombieStatus status);//设置状态
 public:
     int m_col{};//列信息
-    static int s_creatTime;//僵尸创建冷却时间
 protected:
     Timer t_sketch,t_cool;//冰冻效果和打击效果定时器
     int m_speed;//移动速度

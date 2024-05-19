@@ -26,6 +26,7 @@ private:
     ChomperStatus m_status;//食人花状态
     Timer m_timer;//消化时定时器
     int m_damage;//伤害
+    Object*m_temp;//临时僵尸对象指针
 };
 
 

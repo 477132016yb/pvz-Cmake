@@ -3,7 +3,6 @@
 //
 
 #include"Zombie.h"
-int Zombie::s_creatTime=8000;
 Zombie::Zombie() {
     m_action = std::make_shared<Animation>();
     m_headAction = std::make_shared<Animation>();
