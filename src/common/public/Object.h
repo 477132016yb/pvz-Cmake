@@ -22,7 +22,7 @@ public:
     virtual void setEffect(int type){};//设置特效
     virtual void collect(){};//收集
 public:
-    int m_row;//目标所在行
+    int m_row,m_col;//目标所在行列信息
     int m_x{},m_y{};//坐标
     int m_dx=0,m_dy=0;//坐标偏移量
     int m_blood=100;//血量

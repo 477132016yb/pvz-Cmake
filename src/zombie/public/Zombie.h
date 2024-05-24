@@ -34,8 +34,6 @@ public:
     void setEffect(int type) override;
 public:
     void setStatus(ZombieStatus status);//设置状态
-public:
-    int m_col{};//列信息
 protected:
     int m_isArmor;//是否有防具
     Timer t_sketch,t_cool;//冰冻效果和打击效果定时器

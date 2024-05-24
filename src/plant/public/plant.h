@@ -19,6 +19,7 @@ public:
         PotatoMine,
         Chomper,
         TorchWood,
+        CherryBomb,
         None
     };
 public:

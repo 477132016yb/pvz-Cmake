@@ -7,7 +7,7 @@
 plant::plantType PotatoMine::s_type=plantType::PotatoMine;
 PotatoMine::PotatoMine() {
     this->m_dy=30;
-    this->m_damage=1500;
+    this->m_damage=2500;
     Atlas ::SP atlas=std::make_shared<Atlas>(Singleton<res>::instanceSP()->atls_plants[int(s_type)]);
     this->m_status=PotatoMineStatus::UnderGround;
     this->m_action->setAtlas(atlas);

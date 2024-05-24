@@ -41,6 +41,7 @@ public:
     Atlas atl_NutInjured;
     Atlas atl_cardCoolTime;
     Atlas atl_ChomperAttack,atl_ChomperDigestion;
+    Atlas atl_CherryBoom;
 
     Atlas atl_zombieHead;
     Atlas atl_zombieAshes;

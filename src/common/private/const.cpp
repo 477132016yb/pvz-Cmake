@@ -9,10 +9,10 @@ namespace yb{
     bool checkHitX(int x,int objX,int objW){
         return x>objX&&x<objX+objW;
     }
-    std::vector<int> plantCostList = {100,50,175,50,25,150,125};
-    std::vector<int> plantCoolTimeList = {75,100,125,100,300,100,75};
+    std::vector<int> plantCostList = {100,50,175,50,25,150,125,150};
+    std::vector<int> plantCoolTimeList = {75,100,125,100,300,100,75,50};
     std::vector<const char*>plantNameList={
-    "PeaShooter","SunFlower","SnowPea","NutWall","PotatoMine","Chomper","TorchWood"
+    "PeaShooter","SunFlower","SnowPea","NutWall","PotatoMine","Chomper","TorchWood","CherryBomb"
     };
     std::vector<const char*>zombieNameList={
             "NormalZombie","RoadBlockZombie","BucketZombie","FootballZombie"

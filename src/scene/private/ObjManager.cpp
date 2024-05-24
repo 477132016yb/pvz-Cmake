@@ -222,6 +222,7 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
                 m_cur->m_y = 77 + row * 102+m_cur->m_dy;
                 m_cur->m_x = 144 + col * 81+m_cur->m_dx;;
                 m_cur->m_row=row;
+                m_cur->m_col=col;
                 m_plantMap[row][col] = m_cur;
                 m_sun-=yb::plantCostList[idx];
                 m_cardCoolAtion[idx]->reset();
