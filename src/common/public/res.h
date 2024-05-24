@@ -25,6 +25,7 @@ public:
     IMAGE img_shovel,img_shovelSlot;
     IMAGE img_bulletNormal,img_bulletCool,img_bulletFire;
     IMAGE img_PotatoMineUnderGround,img_PotatoMineBoom;
+    IMAGE img_car;
     std::vector<IMAGE>imgs_BlastNormal,imgs_BlastCool;
 
 

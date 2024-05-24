@@ -44,6 +44,7 @@ private:
     std::vector<Object*>m_sunShinePool;//阳光池
     std::vector<Object*>m_bulletPool;//子弹池
     std::vector<Animation::SP>m_cardCoolAtion;//卡牌冷却动画数组
+    std::vector<StaticObj*>m_car;//小推车
     bool m_isMove;//鼠标是否在虚化图片选中时移动
 };
 

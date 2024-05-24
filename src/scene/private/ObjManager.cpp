@@ -29,6 +29,14 @@ void ObjManager::init() {
     m_virtualPlant = dynamic_cast<StaticObj*>(g_factory->create_class("StaticObj"));
     m_shovelObj->setImage(&r->img_shovel);
     m_shovelObj->m_x=760,m_shovelObj->m_y=-10;
+    m_car.resize(5);
+    for(int i=0;i<m_car.size();i++){
+        m_car[i]=dynamic_cast<StaticObj*>(g_factory->create_class("Car"));
+        m_car[i]->m_y = 120 + i * 97;
+        m_car[i]->m_x = 70;
+        m_car[i]->m_row = i;
+        m_car[i]->setImage(&r->img_car);
+    }
 
     m_plantMap = std::vector<std::vector<Object*>>(5, std::vector<Object*>(10,nullptr));
     m_zombiePool = std::vector<std::vector<Object*>>(5);
@@ -44,6 +52,7 @@ void ObjManager::update(int delta) {
     }
     yb::updateVector(m_sunShinePool,delta);
     yb::updateVector(m_bulletPool,delta);
+    yb::updateVector(m_car,delta);
     for(auto&a:m_cardCoolAtion){a->update(delta);}
     processCollide();
     updateMemory();
@@ -85,6 +94,7 @@ void ObjManager::draw() {
     }
     yb::drawVector(m_sunShinePool);
     yb::drawVector(m_bulletPool);
+    yb::drawVector(m_car);
 }
 
 void ObjManager::input(const ExMessage &msg) {
@@ -153,6 +163,12 @@ void ObjManager::updateMemory() {
                 delete b;
                 b = nullptr;
             }
+        }
+    }
+    for(auto&a:m_car){
+        if(a&&!a->m_used){
+            delete a;
+            a= nullptr;
         }
     }
 }
@@ -257,6 +273,12 @@ void ObjManager::processCollide() {
         auto&b=m_plantMap[i];
         collideVec(a,b);
         collideVec(b,a);
+
+        for(auto&c:a){
+            if(m_car[i]){
+                m_car[i]->collide(c);
+            }
+        }
     }
 }
 

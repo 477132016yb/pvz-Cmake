@@ -22,6 +22,7 @@ void res::init() {
     loadimage(&img_bulletFire,"res/imgs/bullets/Fire.png");
     loadimage(&img_PotatoMineUnderGround,"res/plant/PotatoMine/UnderGround.png");
     loadimage(&img_PotatoMineBoom,"res/plant/PotatoMine/Boom.png");
+    loadimage(&img_car,"res/imgs/car.png");
     for (int i = 0; i < imgs_BlastNormal.size(); i++) {
         float k = (i + 1) * 0.2;
         loadimage(&imgs_BlastNormal[i], "res/imgs/bullets/bullet_blast.png",

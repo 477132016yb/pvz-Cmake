@@ -12,6 +12,7 @@
 #include "PotatoMine.h"
 #include "Chomper.h"
 #include "TorchWood.h"
+#include "Car.h"
 REGISTER_CLASS(SunShine);
 REGISTER_CLASS(PeaShooter);
 REGISTER_CLASS(SunFlower);
@@ -21,4 +22,5 @@ REGISTER_CLASS(PotatoMine);
 REGISTER_CLASS(Chomper);
 REGISTER_CLASS(TorchWood);
 REGISTER_CLASS(StaticObj);
+REGISTER_CLASS(Car);
 #endif //PVZ_PLANTHEADFILE_H
