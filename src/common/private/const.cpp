@@ -15,6 +15,6 @@ namespace yb{
     "PeaShooter","SunFlower","SnowPea","NutWall","PotatoMine","Chomper","TorchWood"
     };
     std::vector<const char*>zombieNameList={
-            "NormalZombie","RoadBlockZombie"
+            "NormalZombie","RoadBlockZombie","BucketZombie","FootballZombie"
     };
 }

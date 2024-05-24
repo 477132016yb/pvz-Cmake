@@ -1,10 +1,12 @@
 //
-// Created by yb on 2024/5/10.
+// Created by yb on 2024/5/24.
 //
 
-#include "NormalZombie.h"
-Zombie::ZombieType NormalZombie::s_type=ZombieType::NormalZombie;
-NormalZombie::NormalZombie() {
+#include "../public/FootballZombie.h"
+Zombie::ZombieType FootballZombie::s_type=ZombieType::FootballZombie;
+FootballZombie::FootballZombie() {
+    m_blood=600;
+    m_speed=4;
     auto r=Singleton<res>::instanceSP();
     for(int i=0;i<m_atls.size()-1;i++){
         m_atls[i]=std::make_shared<Atlas>(r->atls_zombies[int(s_type)][i]);
@@ -14,4 +16,5 @@ NormalZombie::NormalZombie() {
 
     this->m_action->setLoop(true);
     this->m_action->setInterval(75);
+
 }

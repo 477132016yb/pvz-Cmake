@@ -15,7 +15,9 @@ public:
 public:
     enum class ZombieType{//僵尸类型
         NormalZombie,
-        RoadBlockZombie
+        RoadBlockZombie,
+        BucketZombie,
+        FootballZombie
     };
     enum class ZombieStatus{//僵尸状态
         Stand,
@@ -35,6 +37,7 @@ public:
 public:
     int m_col{};//列信息
 protected:
+    int m_isArmor;//是否有防具
     Timer t_sketch,t_cool;//冰冻效果和打击效果定时器
     int m_speed;//移动速度
     int m_timer;//控制僵尸整体刷新帧率

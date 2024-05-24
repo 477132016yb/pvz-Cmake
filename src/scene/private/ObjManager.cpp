@@ -235,7 +235,7 @@ void ObjManager::creatZombie(int delta) {
     if (count <=fre) {return;}
     count = 0;
     fre = 8000 + rand() % 5000;
-    auto a = g_factory->create_class(yb::zombieNameList[0]);
+    auto a = g_factory->create_class(yb::zombieNameList[rand() % 4]);
     m_zombiePool[a->m_row].push_back(a);
 }
 

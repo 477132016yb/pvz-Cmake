@@ -4,6 +4,7 @@
 
 #include"Zombie.h"
 Zombie::Zombie() {
+    m_isArmor=false;
     m_action = std::make_shared<Animation>();
     m_headAction = std::make_shared<Animation>();
     m_atls.resize(5);
