@@ -12,6 +12,7 @@ public:
     ~BucketZombie() override =default;
 public:
     void update(int delta) override;
+    ZombieType getType() override;
 public:
     static ZombieType s_type;
 };

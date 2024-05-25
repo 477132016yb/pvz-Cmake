@@ -5,11 +5,14 @@
 #ifndef PVZ_SCENE_H
 #define PVZ_SCENE_H
 
+#include<windows.h>
+#include<mmsystem.h>
 #include "graphics.h"
 #include "const.h"
 #include "Singleton.h"
 #include "Button.h"
 #include "res.h"
+
 class Scene {//³¡¾°»ùÀà
 public:
     Scene()=default;

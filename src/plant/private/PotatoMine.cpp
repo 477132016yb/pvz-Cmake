@@ -52,6 +52,7 @@ void PotatoMine::collide(Object *obj) {
     if(yb::checkHitX(obj->m_x+20,m_x-20,30)&&m_status==PotatoMineStatus::Normal){
         m_status=PotatoMineStatus::Boom;
         obj->m_blood-=m_damage;
+        mciSendString("play res/music/potato_mine.mp3", 0, 0, 0);
         this->m_timer.setWaitTime(1000);
         this->m_timer.restart();
         this->m_timer.setCallback([this](){

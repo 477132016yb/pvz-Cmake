@@ -3,6 +3,7 @@
 //
 
 #include "SelectScene.h"
+#include "ClassFactory.h"
 extern std::vector<int> g_selectNum;
 SelectScene::SelectScene() {
     auto r=Singleton<res>::instanceSP();
@@ -15,6 +16,7 @@ SelectScene::SelectScene() {
     m_fightButton->setRect({155,545,150+150,550+40});
     m_fightButton->setImage(r->imgs_fightButton);
     m_fightButton->setCallback([this](){
+        mciSendString("play res/music/seedlift.mp3", 0, 0, 0);
         m_camera->reSetSpeed(-0.2);
         m_camera->setWaitTime(1940);   //500-112=388  388/0.2=1940
         m_camera->timerReSet();

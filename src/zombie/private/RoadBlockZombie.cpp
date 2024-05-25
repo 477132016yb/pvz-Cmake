@@ -29,3 +29,7 @@ void RoadBlockZombie::update(int delta) {
         setStatus(m_status);
     }
 }
+
+Zombie::ZombieType RoadBlockZombie::getType() {
+    return s_type;
+}

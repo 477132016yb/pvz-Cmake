@@ -38,6 +38,7 @@ void CherryBomb::Boom() {
         for(auto&a:v){
             if(a->m_col>=m_col-1&&a->m_col<=m_col+1){
                 a->m_blood-=m_damage;
+                mciSendString("play res/music/cherrybomb.mp3", 0, 0, 0);
             }
         }
     }

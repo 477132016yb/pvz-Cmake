@@ -15,3 +15,7 @@ NormalZombie::NormalZombie() {
     this->m_action->setLoop(true);
     this->m_action->setInterval(75);
 }
+
+Zombie::ZombieType NormalZombie::getType() {
+    return s_type;
+}

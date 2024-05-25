@@ -18,3 +18,7 @@ FootballZombie::FootballZombie() {
     this->m_action->setInterval(75);
 
 }
+
+Zombie::ZombieType FootballZombie::getType() {
+    return s_type;
+}

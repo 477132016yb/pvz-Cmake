@@ -13,6 +13,8 @@ public:
 public:
     void update(int delta) override;
 public:
+    ZombieType getType() override;
+public:
     static ZombieType s_type;
 };
 

@@ -104,9 +104,11 @@ void Zombie::collide(Object *obj) {
             setStatus(ZombieStatus::Attack);
         }
         count++;
+        mciSendString("play res/music/chompsoft.mp3", 0, 0, 0);
         if(count>30){
             count=0;
             obj->m_blood-=m_damage;
+            mciSendString("play res/music/chomp.mp3", 0, 0, 0);
         }
         if(!obj->m_used){
             setStatus(ZombieStatus::Walking);
@@ -121,11 +123,20 @@ void Zombie::setStatus(Zombie::ZombieStatus status) {
 }
 
 void Zombie::setEffect(int type) {
+    if(getType()==ZombieType::BucketZombie){
+        PlaySound(TEXT("res/music/shieldhit.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    }
+    else{
+        PlaySound(TEXT("res/music/splat2.wav"), NULL, SND_FILENAME | SND_ASYNC);
+    }
     if(type==0){
         m_action->setSketch(true);
     }
     else if(type==1){
-        m_action->setCool(true);
+        if(!m_action->getCool()){
+            m_action->setCool(true);
+            mciSendString("play res/music/frozen.mp3", 0, 0, 0);
+        }
         t_cool.restart();
     }
 }

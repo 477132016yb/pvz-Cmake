@@ -6,6 +6,7 @@
 void MenuScene::on_enter() {
     LOG("进入主菜单");
     m_startButton->reSet();
+    mciSendString("play res/music/bg.mp3", 0, 0, 0);
 }
 
 void MenuScene::on_update(int delta) {

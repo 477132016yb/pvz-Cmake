@@ -147,6 +147,7 @@ void ObjManager::checkSunShine(const ExMessage &msg) {
         if(yb::checkHit(msg.x,msg.y,a->m_x+5,a->m_y+5,60,60)){
             a->collect();
             m_sun+=25;
+            PlaySound(TEXT("res/music/sunshine.wav"), NULL, SND_FILENAME | SND_ASYNC);
         }
     }
 }
@@ -228,11 +229,13 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
                 m_cardCoolAtion[idx]->reset();
                 m_cur= nullptr;
                 idx=-1;
+                PlaySound(TEXT("res/music/plant1.wav"), NULL, SND_FILENAME | SND_ASYNC);
             }
             else if(m_cur&&m_plantMap[row][col]&&m_cur->getName()=="StaticObj"){//²ù×Ó°´ÏÂ
                 m_plantMap[row][col]->m_used=false;
                 m_cur = nullptr;
                 m_shovelObj->m_x=760,m_shovelObj->m_y=-10;
+                PlaySound(TEXT("res/music/plant2.wav"), NULL, SND_FILENAME | SND_ASYNC);
             }
         }
     }

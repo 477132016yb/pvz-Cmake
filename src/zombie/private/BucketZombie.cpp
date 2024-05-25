@@ -29,3 +29,7 @@ void BucketZombie::update(int delta) {
         setStatus(m_status);
     }
 }
+
+Zombie::ZombieType BucketZombie::getType() {
+    return s_type;
+}

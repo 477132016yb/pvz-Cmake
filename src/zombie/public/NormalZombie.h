@@ -11,6 +11,8 @@ public:
     NormalZombie();
     ~NormalZombie() override =default;
 public:
+    ZombieType getType() override;
+public:
     static ZombieType s_type;
 };
 
