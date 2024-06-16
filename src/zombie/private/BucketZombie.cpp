@@ -2,7 +2,7 @@
 // Created by yb on 2024/5/24.
 //
 
-#include "../public/BucketZombie.h"
+#include "BucketZombie.h"
 Zombie::ZombieType BucketZombie::s_type=ZombieType::BucketZombie;
 BucketZombie::BucketZombie() {
     m_blood=500;

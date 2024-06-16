@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "res.h"
 #include "Camera.h"
+#include "Animation.h"
 #include "SceneManager.h"
 
 class SelectScene :public Scene{//Ñ¡¿¨³¡¾°
@@ -24,6 +25,7 @@ private:
     Button::SP m_fightButton;
     std::vector<bool>m_isCardSelect;
     int m_cardWidth,m_cardHeight;
+    std::vector<Animation::SP> m_zombieStandAnimations;
 };
 
 

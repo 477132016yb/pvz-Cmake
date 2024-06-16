@@ -2,7 +2,7 @@
 // Created by yb on 2024/5/24.
 //
 
-#include "../public/FootballZombie.h"
+#include "FootballZombie.h"
 Zombie::ZombieType FootballZombie::s_type=ZombieType::FootballZombie;
 FootballZombie::FootballZombie() {
     m_blood=600;

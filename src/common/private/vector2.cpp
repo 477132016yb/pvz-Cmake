@@ -57,18 +57,18 @@ float vector2::dis() const {
 
 vector2 vector2::operator/(const vector2 &vec) const{
     float l = vec.len();
-    vector2 t=vector2(x,y);
+    vector2 t(x,y);
     return {dv(dot(t, vec), l), dv(cross(t, vec), l)};
 }
 
 vector2 vector2::operator%(const vector2 &vec) const {
-    vector2 t1=vector2(x,y);
+    vector2 t1(x,y);
     vector2 t2=(t1 / vec) * vec;
     return t1 - t2;
 }
 
 vector2 vector2::gcd(const vector2 &vec) const {
-    vector2 t1=vector2(x,y);
+    vector2 t1(x,y);
     return (bool)vec.len() ? gcd(t1 % vec) : t1;
 }
 

@@ -2,7 +2,7 @@
 // Created by yb on 2024/5/24.
 //
 
-#include "../public/RoadBlockZombie.h"
+#include "RoadBlockZombie.h"
 Zombie::ZombieType RoadBlockZombie::s_type=ZombieType::RoadBlockZombie;
 RoadBlockZombie::RoadBlockZombie() {
     m_blood=200;

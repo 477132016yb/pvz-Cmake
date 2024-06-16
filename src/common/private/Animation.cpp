@@ -5,7 +5,7 @@
 #include "Animation.h"
 
 #include <utility>
-
+#include <cstdlib>
 void Animation::reset() {
     m_timer=0;
     m_idx=0;
@@ -81,6 +81,14 @@ bool Animation::getSketch() {
 
 void Animation::setCool(bool flag) {
     m_isCool=flag;
+}
+
+void Animation::randIdx()
+{
+    srand(time(0));
+    int n=m_atlas->getSize()-1;
+    int randomNum = rand() % n;
+    m_idx=randomNum;
 }
 
 bool Animation::getCool() {

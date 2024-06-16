@@ -3,6 +3,7 @@
 //
 
 #include "SelectScene.h"
+
 #include "ClassFactory.h"
 extern std::vector<int> g_selectNum;
 SelectScene::SelectScene() {
@@ -24,6 +25,15 @@ SelectScene::SelectScene() {
             Singleton<SceneManager>::instance()->switchTo(SceneManager::SceneType::Game);
         });
     });
+
+    m_zombieStandAnimations.resize(9);
+    int i=0;
+    for(auto&a:m_zombieStandAnimations){
+        a = std::make_shared<Animation>();
+        auto atlas=std::make_shared<Atlas>(r->atls_zombies[i++%ZOMBIE_COUNT][0]);
+        a->setAtlas(atlas);
+        a->randIdx();
+    }
 }
 
 void SelectScene::on_enter() {
@@ -33,34 +43,46 @@ void SelectScene::on_enter() {
 
 void SelectScene::on_update(int delta) {
     m_camera->update(delta);
+    for(auto&a:m_zombieStandAnimations){
+        a->update(delta);
+    }
 }
 
 void SelectScene::on_draw() {
     auto r=Singleton<res>::instanceSP();
     putimage(0-m_camera->getPosition().x,0-m_camera->getPosition().y,&r->img_bg);
-    if(m_camera->isTrigger()){
-        int objY=r->img_selectBar.getheight();
-        putimage(0,0,&r->img_selectBar);
-        putimage(0,objY,&r->img_PanelBackGround);
-        m_fightButton->draw();
+    vector2 points[9] = {
+        {550,80},{530,160},{630,170},{530,200},{515,270},
+        {565,370},{605,340},{705,280},{690,340}
+    };
+    for(int i=0;i<m_zombieStandAnimations.size();i++){
+        auto&a=m_zombieStandAnimations[i];
+        a->draw(points[i].x-m_camera->getPosition().x+500,points[i].y-m_camera->getPosition().y);
+    }
+    if(!m_camera->isTrigger()){
+        return;
+    }
+    int objY=r->img_selectBar.getheight();
+    putimage(0,0,&r->img_selectBar);
+    putimage(0,objY,&r->img_PanelBackGround);
+    m_fightButton->draw();
 
-        for(int i=0;i<r->imgs_selectCard.size();i++){
-            int row=i/8,col=i%8;
-            int x=25+col*(m_cardWidth+2);
-            int y=objY+40+row*(m_cardHeight+1);
-            putimage(x,y,&r->imgs_selectCard[i]);
-            if(m_isCardSelect[i]){
-                putimagePNG(x,y,&r->img_selectCardMask);
-            }
+    for(int i=0;i<r->imgs_selectCard.size();i++){
+        int row=i/8,col=i%8;
+        int x=25+col*(m_cardWidth+2);
+        int y=objY+40+row*(m_cardHeight+1);
+        putimage(x,y,&r->imgs_selectCard[i]);
+        if(m_isCardSelect[i]){
+            putimagePNG(x,y,&r->img_selectCardMask);
         }
+    }
 
-        for(int i=0;i<g_selectNum.size();i++){
-            if(g_selectNum[i]==-1){break;}
-            int num=g_selectNum[i];
-            int x=78+i*(m_cardWidth+5);
-            int y=5;
-            putimage(x,y,&r->imgs_selectCard[num]);
-        }
+    for(int i=0;i<g_selectNum.size();i++){
+        if(g_selectNum[i]==-1){break;}
+        int num=g_selectNum[i];
+        int x=78+i*(m_cardWidth+5);
+        int y=5;
+        putimage(x,y,&r->imgs_selectCard[num]);
     }
 }
 

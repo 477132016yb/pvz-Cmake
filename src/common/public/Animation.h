@@ -26,6 +26,7 @@ public:
     void setSketch(bool flag);
     bool getCool();
     void setCool(bool flag);
+    void randIdx();
 public:
     void update(int delta);
     void draw(int x,int y)const;

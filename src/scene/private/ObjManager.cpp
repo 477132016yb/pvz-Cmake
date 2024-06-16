@@ -204,7 +204,7 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
     static int idx = -1;
     if (!m_cur&&msg.x > 227 && msg.x < 227 + 64 * g_selectNum.size() && msg.y < 96 && msg.y>8) {
         idx = (msg.x - (227)) / 64;
-        if(m_sun<yb::plantCostList[g_selectNum[idx]]||!m_cardCoolAtion[idx]->checkFinished()){ return;}
+        if(g_selectNum[idx]==-1||m_sun<yb::plantCostList[g_selectNum[idx]]||!m_cardCoolAtion[idx]->checkFinished()){ return;}
         m_cur = g_factory->create_class(yb::plantNameList[g_selectNum[idx]]);
         m_virtualPlant->setImage(&Singleton<res>::instanceSP()->imgs_vriPlantVec[g_selectNum[idx]]);
         m_virtualPlant->m_isDraw=true;
@@ -227,7 +227,7 @@ void ObjManager::processLeftButton(const ExMessage &msg) {
                 m_plantMap[row][col] = m_cur;
                 m_sun-=yb::plantCostList[idx];
                 m_cardCoolAtion[idx]->reset();
-                m_cur= nullptr;
+                m_cur = nullptr;
                 idx=-1;
                 PlaySound(TEXT("res/music/plant1.wav"), NULL, SND_FILENAME | SND_ASYNC);
             }

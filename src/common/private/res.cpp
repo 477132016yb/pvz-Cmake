@@ -50,7 +50,7 @@ void res::init() {
     }
     for(int i=0;i<imgs_selectCard.size();i++){
         TCHAR path[64];
-        sprintf_s(path,"res/Cards/%d.png",i+1);
+        sprintf_s(path,"res/imgs/Cards/%d.png",i+1);
         loadimage(&imgs_selectCard[i],path,50,72);
         loadimage(&imgs_gameCard[i],path,60,85);
     }
@@ -95,8 +95,8 @@ res::res() {
     atls_zombies=std::vector<std::vector<Atlas>>(ZOMBIE_COUNT,std::vector<Atlas>(zombieStatusName.size()));
     imgs_startButton.resize(3);
     imgs_fightButton.resize(3);
-    imgs_selectCard.resize(getFileNum("res/Cards/"));
-    imgs_gameCard.resize(getFileNum("res/Cards/"));
+    imgs_selectCard.resize(getFileNum("res/imgs/Cards/"));
+    imgs_gameCard.resize(getFileNum("res/imgs/Cards/"));
     imgs_vriPlantVec.resize(getFileNum("res/imgs/vritual"));
     imgs_BlastCool.resize(4);
     imgs_BlastNormal.resize(4);

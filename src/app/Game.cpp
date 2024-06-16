@@ -32,7 +32,6 @@ void Game::play() {
             Sleep(1000/FPS-frame_delta_time);
         }
     }
-    EndBatchDraw();
 }
 
 void Game::init() {
