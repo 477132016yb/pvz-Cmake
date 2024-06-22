@@ -11,7 +11,7 @@ Zombie::Zombie() {
     m_speed=2;
     m_timer=0;
     m_x = 850+ rand() % 100;
-    m_row = 3+rand() % 2;
+    m_row = rand() % 5;
     m_y = 30 + 100 * m_row;
     m_damage=20;
 
